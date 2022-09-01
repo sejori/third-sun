@@ -34,15 +34,13 @@ storyRoutes.push({
   handler: Peko.ssrHandler({
     render: () => htmlDoc.replace(
       /(?<=<main(.)*>)(.|\n)*?(?=<\/main>)/,
-      `<h1>Stories</h1>
+      `<h1>Stories!</h1>
       <ul class="story-list">
-        ${storyRoutes.map(sRoute => `
-          <li class="story-list-item">
-            <a href="${sRoute.route}">
-              <h2>${sRoute.route.slice(sRoute.route.lastIndexOf("/")+1).toUpperCase()}</h2>
-            </a>
-          </li>
-        `)}
+        ${storyRoutes.map(sRoute => sRoute.route !== "/stories" ? `<li class="story-list-item">
+          <a href="${sRoute.route}">
+            <h2>${sRoute.route.slice(sRoute.route.lastIndexOf("/")+1).toUpperCase()}</h2>
+          </a>
+        </li>` : "").join('')}
       </ul>`
     )
   })

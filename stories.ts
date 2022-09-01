@@ -1,4 +1,4 @@
-import * as Peko from "https://deno.land/x/peko@v0.5/mod.ts"
+import * as Peko from "https://deno.land/x/peko@v0.5.2/mod.ts"
 import { fromFileUrl } from "https://deno.land/std@0.150.0/path/mod.ts"
 import MarkdownIt from "https://esm.sh/markdown-it@13.0.1"
 

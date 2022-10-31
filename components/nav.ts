@@ -1,4 +1,4 @@
-customElements.define('nav-menu', class NavMenu extends HTMLButtonElement {
+customElements.define('nav-menu', class NavMenu extends HTMLElement {
   open = false;
   
   constructor() {
@@ -6,6 +6,12 @@ customElements.define('nav-menu', class NavMenu extends HTMLButtonElement {
 
     this.addEventListener('click', this.toggleOpen);
     this.style.transition = 'all 40ms ease-in-out';
+
+    console.log("constructed!", this)
+  }
+
+  connectedCallback() {
+    console.log('connected.')
   }
 
   toggleOpen() {
@@ -13,7 +19,9 @@ customElements.define('nav-menu', class NavMenu extends HTMLButtonElement {
     this.open = !this.open
   }
 }, {
-  extends: "button"
+  extends: "nav"
 });
 
 console.log("im=here")
+
+document.querySelector("nav")?.setAttribute("is", "nav-menu")

@@ -11,17 +11,6 @@
   <link rel="stylesheet" href="/static/style/parallax.css">
 </head>
 <body>
-  <nav>
-    <label id="nav-button">
-      <p style="display: none;">Offerings:&nbsp;</p>
-      <img id="menu-icon" role="button" src="/static/images/HAMBURGER_LIGHT.png" alt="menu">
-    </label>
-
-    <section id="nav-content">
-
-    </section>
-  </nav>
-
   <div class="parallax">
     <header class="parallax__group">
       <img src="/static/images/BLUE_LOGO-min.png" class="parallax__layer parallax__layer--deep">
@@ -30,13 +19,34 @@
       <img src="/static/images/BLUE_FOREGROUND-min.png" class="parallax__layer parallax__layer--base">
     </header>
 
-    <main class="parallax__group">
+    <section class="parallax__group">
+      <nav>
+        <label id="nav-button">
+          <p style="display: none;">Offerings:&nbsp;</p>
+          <img id="menu-icon" role="button" src="/static/images/HAMBURGER_LIGHT.png" alt="menu">
+        </label>
+    
+        <div id="nav-content">
+    
+        </div>
+      </nav>
+
       <div class="container">
-        <img src="/static/images/logo.png" alt="third-son-silver-logo">
+        <div class="spacer-med">&nbsp;</div>
+
+        <!-- <img src="/static/images/logo.png" alt="third-son-silver-logo"> -->
         <h1>Third Sun Silver</h1>
         <h2><a href="stories">Stories -></a></h2>
       </div>
-    </main>
+    </section>
+
+    <section class="parallax__group" style="background-color: pink;">
+      <div class="spacer-large">&nbsp;</div>
+    </section>
+
+    <footer class="parallax__group">
+      <p>Made by ya bois Seb & Tom, representing Peko & iiisun.art respectively.</p>
+    </footer>
   </div>
 </body>
 </html>

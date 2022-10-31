@@ -23,13 +23,26 @@ h1 {
   font-size: 72px;
 }
 
-main {
+section {
   color: whitesmoke;
   background-color: #09132e;
+  position: relative;
+  padding: 50px;
+}
+
+footer {
+  /* background: radial-gradient(ellipse at top, #09132e, whitesmoke); */
+  background-color: whitesmoke;
+  color: #09132e;
+  position: relative;
+  padding: 50px;
 }
 
 .container {
-  margin: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
   padding: 10px;
   max-width: 800px;
   height: 100%;
@@ -40,4 +53,14 @@ main {
 .center {
   align-items: center;
   justify-content: center;
+}
+
+.spacer-large {
+  user-select: none;
+  font-size: 500px;
+}
+
+.spacer-med {
+  user-select: none;
+  font-size: 250px;
 }

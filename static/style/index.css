@@ -6,6 +6,10 @@ html, body {
   font-family: sans-serif;
 }
 
+main {
+  background-color: #09132e;
+}
+
 * {
   box-sizing: border-box;
 }

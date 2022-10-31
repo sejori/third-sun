@@ -16,6 +16,7 @@ main {
 
 .container {
   margin: auto;
+  padding: 10px;
   max-width: 800px;
   height: 100%;
   display: flex;
@@ -25,4 +26,8 @@ main {
 .center {
   align-items: center;
   justify-content: center;
+}
+
+img {
+  max-width: 100%;
 }

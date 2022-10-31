@@ -1,9 +1,14 @@
+@font-face {
+  font-family: iiisun;
+  src: url("/static/style/iiisunFont-Regular.otf");
+}
+
 html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   background-color: #09132e;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'iiisun', 'Calibri', serif;
 }
 
 * {
@@ -14,7 +19,12 @@ img {
   max-width: 100%;
 }
 
+h1 {
+  font-size: 72px;
+}
+
 main {
+  color: whitesmoke;
   background-color: #09132e;
 }
 

@@ -1,6 +1,9 @@
 nav {
   background-color: coral;
-  position: sticky;
+  position: fixed;
+  z-index: 3;
+  top: 50px;
+  right: 50px;
   width: 100px;
   height: 100px;
   padding: 10px;
@@ -13,6 +16,7 @@ nav {
 
 #menu-icon {
   width: 100px;
+  cursor: pointer;
 }
 
 #menu-content {

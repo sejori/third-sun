@@ -10,9 +10,10 @@ const server = new Peko.Server({
 })
 
 Array.from([
+  { route: "/hello", handler: () => new Response("<code>.b,b! ~hello!</code>")},
   ...staticOnes, 
   ...stories,
   ...components
 ]).forEach(route => server.addRoute(route))
 
-server.listen()
+server.listen() //  say hello Robbit .b,b.

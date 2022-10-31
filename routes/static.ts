@@ -14,7 +14,7 @@ export default files.map((file): Peko.Route => {
     route: fileRoute.replace("static/index.html", ""),
     middleware: prod ? Peko.cacher(cache) : [],
     handler: Peko.staticHandler({
-      fileURL: new URL(`.${fileRoute}`, import.meta.url),
+      fileURL: new URL(`..${fileRoute}`, import.meta.url),
       contentType: lookup(file),
       headers: new Headers({
         "Cache-Control": "max-age=600, stale-while-revalidate=86400"

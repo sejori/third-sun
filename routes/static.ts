@@ -5,7 +5,7 @@ import { fromFileUrl } from "fromFileUrl"
 
 const prod = Deno.env.get("ENVIRONMENT") === "production"
 const cache = new Peko.ResponseCache()
-const files = await recursiveReaddir(fromFileUrl(new URL("./static", import.meta.url)))
+const files = await recursiveReaddir(fromFileUrl(new URL("../static", import.meta.url)))
 
 export default files.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length)

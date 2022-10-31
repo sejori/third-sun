@@ -4,10 +4,11 @@ import MarkdownIt from "markdownit"
 
 const md = new MarkdownIt()
 const cache = new Peko.ResponseCache()
-const htmlDoc = await Deno.readTextFile("./static/index.html")
+console.log(new URL("../static/index.html", import.meta.url))
+const htmlDoc = await Deno.readTextFile(new URL("../static/index.html", import.meta.url))
 const storyRoutes: Peko.Route[] = []
 
-const storiesPath = fromFileUrl(new URL("./stories", import.meta.url))
+const storiesPath = fromFileUrl(new URL("../stories", import.meta.url))
 
 for await (const dirEntry of Deno.readDir(storiesPath)) {
   if (dirEntry.name.includes(".md")) {

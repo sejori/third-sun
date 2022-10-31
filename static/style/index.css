@@ -3,11 +3,7 @@ html, body {
   height: 100%;
   margin: 0;
   background-color: #09132e;
-  font-family: sans-serif;
-}
-
-main {
-  background-color: #09132e;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 * {
@@ -16,6 +12,10 @@ main {
 
 img {
   max-width: 100%;
+}
+
+main {
+  background-color: #09132e;
 }
 
 .container {

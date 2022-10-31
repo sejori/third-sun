@@ -55,12 +55,12 @@ footer {
   justify-content: center;
 }
 
-.spacer-large {
+.spacer-lg {
   user-select: none;
   font-size: 500px;
 }
 
-.spacer-med {
+.spacer-md {
   user-select: none;
   font-size: 250px;
 }

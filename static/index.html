@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/static/style/index.css">
   <link rel="stylesheet" href="/static/style/nav.css">
   <link rel="stylesheet" href="/static/style/parallax.css">
+
+  <script type="module" src="/components/nav.ts"></script>
 </head>
 <body>
   <div class="parallax">
@@ -20,7 +22,7 @@
     </header>
 
     <section class="parallax__group">
-      <nav>
+      <nav is="nav-menu">
         <label id="nav-button">
           <p style="display: none;">Offerings:&nbsp;</p>
           <img id="menu-icon" role="button" src="/static/images/HAMBURGER_LIGHT.png" alt="menu">
@@ -37,11 +39,15 @@
         <!-- <img src="/static/images/logo.png" alt="third-son-silver-logo"> -->
         <h1>Third Sun Silver</h1>
         <h2><a href="stories">Stories -></a></h2>
+
+        <div class="spacer-lg">&nbsp;</div>
+        <div class="spacer-lg">&nbsp;</div>
+        <div class="spacer-lg">&nbsp;</div>
       </div>
     </section>
 
     <section class="parallax__group" style="background-color: pink;">
-      <div class="spacer-large">&nbsp;</div>
+      <div class="spacer-lg">&nbsp;</div>
     </section>
 
     <footer class="parallax__group">

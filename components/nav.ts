@@ -1,18 +1,19 @@
-// This is a basic web component
-class AppButton extends HTMLButtonElement {
+customElements.define('nav-menu', class NavMenu extends HTMLButtonElement {
+  open = false;
+  
   constructor() {
     super();
 
-    this.addEventListener('click', this.setRandomValue);
-
+    this.addEventListener('click', this.toggleOpen);
     this.style.transition = 'all 40ms ease-in-out';
   }
 
-  async setRandomValue() {
-    const response = await fetch('/api/v0/random-positive-int');
-    const { number } = await response.json();
-    this.innerText = `Got ${number}! Click me again!`;
+  toggleOpen() {
+    console.log('clicked', this.open)
+    this.open = !this.open
   }
-}
+}, {
+  extends: "button"
+});
 
-export default AppButton;
+console.log("im=here")

@@ -1,6 +1,6 @@
 nav {
-  background-color: coral;
   position: sticky;
+  background-color: coral;
   z-index: 3;
   display: flex;
   justify-content: flex-end;

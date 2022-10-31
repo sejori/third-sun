@@ -4,7 +4,7 @@ import MarkdownIt from "https://esm.sh/markdown-it@13.0.1"
 
 const md = new MarkdownIt()
 const cache = new Peko.ResponseCache()
-const htmlDoc = await Deno.readTextFile("./public/index.html")
+const htmlDoc = await Deno.readTextFile("./static/index.html")
 const storyRoutes: Peko.Route[] = []
 
 const storiesPath = fromFileUrl(new URL("./stories", import.meta.url))

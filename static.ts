@@ -1,13 +1,13 @@
-import * as Peko from "https://deno.land/x/peko@v0.5.2/mod.ts"
-import { recursiveReaddir } from "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts"
-import { lookup } from "https://deno.land/x/media_types@v3.0.3/mod.ts"
-import { fromFileUrl } from "https://deno.land/std@0.150.0/path/mod.ts"
+import * as Peko from "peko"
+import { recursiveReaddir } from "recursiveReadDir"
+import { lookup } from "lookup"
+import { fromFileUrl } from "fromFileUrl"
 
 const prod = Deno.env.get("ENVIRONMENT") === "production"
 const cache = new Peko.ResponseCache()
 const files = await recursiveReaddir(fromFileUrl(new URL("./static", import.meta.url)))
 
-export default files.map(file => {
+export default files.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length)
 
   return {

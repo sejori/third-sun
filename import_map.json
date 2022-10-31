@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "peko": "https://deno.land/x/peko@v0.5.4/mod.ts",
+    "recursiveReadDir": "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts",
+    "lookup": "https://deno.land/x/media_types@v3.0.3/mod.ts",
+    "fromFileUrl": "https://deno.land/std@0.150.0/path/mod.ts",
+    "markdownit": "https://esm.sh/markdown-it@13.0.1"
+  }
+}

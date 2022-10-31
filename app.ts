@@ -1,4 +1,4 @@
-import * as Peko from "https://deno.land/x/peko@v0.5.4/mod.ts"
+import * as Peko from "peko"
 import staticRoutes from "./static.ts"
 import storyRoutes from "./stories.ts"
 

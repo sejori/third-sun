@@ -8,6 +8,7 @@
   position: relative;
   height: 100%;
   transform-style: preserve-3d;
+  background-color: #09132e;
 }
 .parallax__layer {
   position: absolute;

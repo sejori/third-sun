@@ -8,11 +8,11 @@ html, body {
   height: 100%;
   margin: 0;
   background-color: #09132e;
-  font-family: 'iiisun', 'Calibri', serif;
 }
 
 * {
   box-sizing: border-box;
+  font-family: 'iiisun', 'Calibri', serif;
 }
 
 img {

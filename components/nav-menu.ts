@@ -41,10 +41,14 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
 
   moveToBody() {
     globalThis.document.body.insertBefore(this, globalThis.document.body.firstChild)
+    // completing hijacking these to implement a background hack. soz
+    globalThis.document.body.style.backgroundColor = "black"
   }
 
   moveBackHome() {
     this.home!.insertBefore(this, this.home!.firstChild)
+    // completing hijacking these to implement a background hack. soz
+    globalThis.document.body.style.backgroundColor = "#09132e"
   }
 
   async toggleOpen() {

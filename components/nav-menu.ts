@@ -9,7 +9,7 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
   onBody = false
 
   constructor() {
-    console.log("constructed nav-button");
+    console.log("constructed nav-menu");
     super();
 
     globalThis.document.querySelector("#nav-button")!.addEventListener('click', () => {

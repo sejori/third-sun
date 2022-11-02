@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="/static/style/nav.css">
   <link rel="stylesheet" href="/static/style/parallax.css">
 
-  <script type="module" src="/components/nav.ts"></script>
+  // polyfill for safari - https://stackoverflow.com/questions/67466609/customizable-built-in-elements-on-safari-polyfill-via-script-tag-vs-es6-import
+  <script src="//unpkg.com/@ungap/custom-elements/es.js"></script>
+  <script type="module" src="/components/nav-menu.ts"></script>
 </head>
 <body>
   <div class="parallax">

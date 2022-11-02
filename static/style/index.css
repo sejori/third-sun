@@ -8,7 +8,7 @@ html, body {
   height: 100%;
   margin: 0;
   background-color: #09132e;
-  color: #8bc8fb;
+  color: whitesmoke;
   scroll-behavior: smooth;
 }
 
@@ -22,7 +22,7 @@ h1 { font-size: 84px; }
 h2 { font-size: 72px; }
 h3 { font-size: 48px; }
 h4 { font-size: 32px; }
-p { font-size: 24px; color: whitesmoke; }
+p { font-size: 24px; }
 a {
   color: #eb901a;
 }
@@ -31,6 +31,9 @@ section {
   background-color: #09132e;
   padding: 10px;
 }
+section h1 { color: #8bc8fb; }
+section p { color: whitesmoke; }
+
 
 footer {
   background-color: whitesmoke;

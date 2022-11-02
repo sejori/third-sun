@@ -7,6 +7,13 @@ nav {
   width: 100px;
   height: 100px;
 }
+nav h1 {
+  color: darkgrey;
+}
+nav li {
+  font-size: 32px;
+  margin: 25px;
+}
 
 #nav-button {
   z-index: 3;
@@ -24,10 +31,9 @@ nav {
 }
 
 #nav-content {
-  padding: 30px;
+  padding: 50px 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;

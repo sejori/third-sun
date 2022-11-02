@@ -9,6 +9,7 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
   onBody = false
 
   constructor() {
+    console.log("constructed nav-button");
     super();
 
     globalThis.document.querySelector("#nav-button")!.addEventListener('click', () => {
@@ -47,6 +48,8 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
   }
 
   async toggleOpen() {
+    console.log("toggleOpen", this)
+
     this.open = !this.open
     this.classList.toggle("isOpen");
 

@@ -23,10 +23,6 @@ nav {
   padding: 0;
 }
 
-nav.isOpen > #nav-button {
-  color: darkgray;
-}
-
 #nav-content {
   padding: 30px;
   display: flex;

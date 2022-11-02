@@ -9,6 +9,20 @@ const server = new Peko.Server({
   eventLogger: (e) => { if (e.type === "error") console.log(e) }
 })
 
+// index.html route
+server.addRoute({
+  route: "/",
+  method: "GET",
+  handler: Peko.staticHandler({
+    fileURL: new URL("./index.html", import.meta.url),
+    contentType: "text/html",
+    headers: new Headers({
+      "Cache-Control": "max-age=600, stale-while-revalidate=86400"
+    })
+  })
+})
+
+// all other routes from "./routes"
 Array.from([
   { route: "/hello", handler: () => new Response("<code>.b,b! ~hello!</code>")},
   ...staticOnes, 
@@ -16,4 +30,4 @@ Array.from([
   ...components
 ]).forEach(route => server.addRoute(route))
 
-server.listen() //  say hello Robbit .b,b.
+server.listen() //  say hello Rabbit boi .b,b!

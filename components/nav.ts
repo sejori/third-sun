@@ -1,17 +1,12 @@
 customElements.define('nav-menu', class NavMenu extends HTMLElement {
   home = document.querySelector("#info")
   nextSection = document.querySelector("#showcase")
+  ogHeight = this.style.height
+  ogWidth = this.style.width
 
-  initWidth = this.style.width
-  initHeight = this.style.height
-  initRadius = this.style.borderRadius
-  initTransform = this.style.transform
-  initTop = this.style.top
-  initRight = this.style.right
-  initColor = this.style.color
-  initBg = this.style.backgroundColor
-
-  canSeeShowcase = false
+  // used to throlle calls from IntersectionObserver
+  // and relocate if menu opened not at scroll position
+  onBody = false
 
   constructor() {
     super();
@@ -21,14 +16,15 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
   }
 
   connectedCallback() {
+    console.log('here', this)
     const observer = new IntersectionObserver(e => {
       const showcaseInView = e[0].isIntersecting
-      if (showcaseInView && showcaseInView !== this.canSeeShowcase) {
-        this.canSeeShowcase = true
+      if (showcaseInView && !this.onBody) {
+        this.onBody = true
         this.moveToBody()
       }
-      if (!showcaseInView && showcaseInView !== this.canSeeShowcase) {
-        this.canSeeShowcase = false
+      if (!showcaseInView && this.onBody) {
+        this.onBody = false
         this.moveBackHome()
       }
     }, {
@@ -47,13 +43,21 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
     this.home!.insertBefore(this, this.home!.firstChild)
   }
 
-  toggleOpen() {
+  async toggleOpen() {
     this.classList.toggle("isOpen");
+    if (!this.onBody) this.home?.scrollIntoView({
+      behavior: "smooth"
+    })
     
     if (this.classList.contains("isOpen")) {
-      globalThis.document.querySelector("#nav-button")!.textContent = "X";
+      globalThis.document.querySelector("#nav-button")!.textContent = "X"
+      this.style.height = "100vh"
+      this.style.width = "100vw"
     } else {
-      globalThis.document.querySelector("#nav-button")!.textContent = "+";
+      globalThis.document.querySelector("#nav-button")!.textContent = "+"
+      await new Promise(res => setTimeout(res, 600))
+      this.style.height = this.ogHeight
+      this.style.width = this.ogWidth
     }
   }
 }, {

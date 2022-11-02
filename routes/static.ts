@@ -11,7 +11,7 @@ export default files.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length)
 
   return {
-    route: fileRoute.replace("static/index.html", ""),
+    route: fileRoute,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: Peko.staticHandler({
       fileURL: new URL(`..${fileRoute}`, import.meta.url),

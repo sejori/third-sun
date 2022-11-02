@@ -1,6 +1,5 @@
 customElements.define('nav-menu', class NavMenu extends HTMLElement {
-  home = document.querySelector("#info")
-  nextSection = document.querySelector("#showcase")
+  home = this.parentElement
   ogHeight = this.style.height
   ogWidth = this.style.width
 
@@ -10,30 +9,33 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
 
   constructor() {
     super();
+
     globalThis.document.querySelector("#nav-button")!.addEventListener('click', () => {
       this.toggleOpen()
     });
-  }
 
-  connectedCallback() {
-    console.log('here', this)
     const observer = new IntersectionObserver(e => {
-      const showcaseInView = e[0].isIntersecting
-      if (showcaseInView && !this.onBody) {
+      const headerInView = e[0].isIntersecting
+      if (!headerInView && !this.onBody) {
         this.onBody = true
         this.moveToBody()
       }
-      if (!showcaseInView && this.onBody) {
+      if (headerInView && this.onBody) {
         this.onBody = false
         this.moveBackHome()
       }
     }, {
       root: null, // document body
-      rootMargin: "0px" // viewport bounds
+      rootMargin: "0px", // viewport bounds
+      threshold: [0]
     });
-      
-    observer.observe(this.nextSection!)
+    
+    observer.observe(globalThis.document.body.querySelector("header")!)
   }
+
+  // connectedCallback() {
+  //   console.log(this, 'connected!')
+  // }
 
   moveToBody() {
     globalThis.document.body.insertBefore(this, globalThis.document.body.firstChild)

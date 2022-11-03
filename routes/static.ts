@@ -8,10 +8,10 @@ const cache = new Peko.ResponseCache()
 const files = await recursiveReaddir(fromFileUrl(new URL("../static", import.meta.url)))
 
 export default files.map((file): Peko.Route => {
-  const fileRoute = file.slice(Deno.cwd().length)
+  const fileRoute = file.slice(Deno.cwd().length+1)
 
   return {
-    route: fileRoute,
+    route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: Peko.staticHandler({
       fileURL: new URL(`..${fileRoute}`, import.meta.url),

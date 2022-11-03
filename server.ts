@@ -3,11 +3,8 @@ import staticOnes from "./routes/static.ts"
 import stories from "./routes/stories.ts"
 import components from "./routes/components.ts"
 
-const server = new Peko.Server({
-  port: 3000,
-  globalMiddleware: [ Peko.logger ],
-  eventLogger: (e) => { if (e.type === "error") console.log(e) }
-})
+const server = new Peko.Server()
+server.use(Peko.logger)
 
 // index.html route
 server.addRoute({
@@ -23,11 +20,11 @@ server.addRoute({
 })
 
 // all other routes from "./routes"
-Array.from([
+server.addRoutes([
   { route: "/hello", handler: () => new Response("<code>.b,b! ~hello!</code>")},
   ...staticOnes, 
   ...stories,
   ...components
-]).forEach(route => server.addRoute(route))
+])
 
-server.listen() //  say hello Rabbit boi .b,b!
+server.listen(3000) //  say hello Rabbit boi .b,b!

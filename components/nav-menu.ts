@@ -9,10 +9,9 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
   onBody = false
 
   constructor() {
-    console.log("constructed nav-menu");
     super();
 
-    globalThis.document.querySelector("#nav-button")!.addEventListener('click', () => {
+    globalThis.document.querySelector("#nav-button")!.addEventListener("click", () => {
       this.toggleOpen()
     });
 
@@ -33,6 +32,8 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
     });
     
     observer.observe(globalThis.document.body.querySelector("header")!)
+
+    console.log("constructed nav-menu")
   }
 
   // connectedCallback() {
@@ -42,13 +43,18 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
   moveToBody() {
     globalThis.document.body.insertBefore(this, globalThis.document.body.firstChild)
     // completing hijacking these to implement a background hack. soz
+    // will be triggered by event now
     globalThis.document.body.style.backgroundColor = "black"
+
+    globalThis.document.dispatchEvent(new CustomEvent("nav-menu_move-to-body"))
   }
 
   moveBackHome() {
     this.home!.insertBefore(this, this.home!.firstChild)
     // completing hijacking these to implement a background hack. soz
     globalThis.document.body.style.backgroundColor = "#09132e"
+
+    globalThis.document.dispatchEvent(new CustomEvent("nav-menu_move-back-home"))
   }
 
   async toggleOpen() {

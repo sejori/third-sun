@@ -15,9 +15,8 @@ export default files.map((file): Peko.Route => {
     route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: async (ctx) => {
-      const tsResponse = await Peko.staticHandler({
-        fileURL: fileUrl,
-        contentType: "application/javascript"
+      const tsResponse = await Peko.staticHandler(fileUrl, {
+        headers: new Headers({ "Content-Type": "application/javascript" })
       })(ctx)
       const tsCode = await tsResponse.text()
       const jsCode = await transpileTs(tsCode, fileUrl)

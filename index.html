@@ -13,15 +13,17 @@
 
   <!-- polyfill for safari - https://stackoverflow.com/questions/67466609/customizable-built-in-elements-on-safari-polyfill-via-script-tag-vs-es6-import -->
   <script src="//unpkg.com/@ungap/custom-elements/es.js"></script>
+  <script type="module" src="/components/smart-img.ts"></script>
   <script type="module" src="/components/nav-menu.ts"></script>
 </head>
+
 <body>
   <div class="parallax">
     <header class="parallax__group">
-      <img src="/static/images/header-bg/BLUE_LOGO-min.png" class="parallax__layer deep">
-      <img src="/static/images/header-bg/BLUE_BACKGROUND-min.png" class="parallax__layer background">
-      <img src="/static/images/header-bg/BLUE_MIDGROUND-min.png" class="parallax__layer midground">
-      <img src="/static/images/header-bg/BLUE_FOREGROUND-min.png" class="parallax__layer foreground">
+      <img is="smart-img" class="parallax__layer deep" data-src="/static/images/header-bg/BLUE_LOGO-min.png" data-resolutions='["400x400", "800x800", "1600x1600"]'>
+      <img is="smart-img" class="parallax__layer background" data-src="/static/images/header-bg/BLUE_BACKGROUND-min.png" data-resolutions='["400x400", "800x800", "1600x1600"]'>
+      <img is="smart-img" class="parallax__layer midground" data-src="/static/images/header-bg/BLUE_MIDGROUND-min.png" data-resolutions='["400x400", "800x800", "1600x1600"]'>
+      <img is="smart-img" class="parallax__layer foreground" data-src="/static/images/header-bg/BLUE_FOREGROUND-min.png" data-resolutions='["400x400", "800x800", "1600x1600"]'>
     </header>
 
     <section id="info" class="fade parallax__group">
@@ -52,7 +54,7 @@
 
     <section class="parallax__group">
       <div class="container wide foreground">
-        <img loading="lazy" style="width: 500px; align-self: flex-start;" src="/static/images/showcase/Page3.png" alt="Page3">
+        <img is="smart-img" style="width: 500px; align-self: flex-start;" alt="Page3" data-src="/static/images/showcase/Page3.png" data-resolutions='["400x400", "800x800", "1600x1600"]' data-triggerevent="nav-menu_move-to-body">
       </div>
       <div class="container wide background">
         <img loading="lazy" style="width: 480px; align-self: flex-end;" src="/static/images/showcase/Page1.png" alt="Page1">

@@ -18,12 +18,10 @@ for await (const dirEntry of Deno.readDir(storiesPath)) {
     storyRoutes.push({
       route: `/stories/${dirEntry.name.replace(".md", "")}`,
       middleware: Peko.cacher(cache),
-      handler: Peko.ssrHandler({
-        render: () => htmlDoc.replace(
-          /(?<=<main(.)*>)(.|\n)*?(?=<\/main>)/,
-          md.render((content))
-        )
-      })
+      handler: Peko.ssrHandler(() => htmlDoc.replace(
+        /(?<=<main(.)*>)(.|\n)*?(?=<\/main>)/,
+        md.render((content))
+      ))
     })
   }
 }

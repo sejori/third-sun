@@ -1,5 +1,6 @@
 import * as Peko from "peko"
 import staticOnes from "./routes/static.ts"
+import images from "./routes/images.ts"
 import stories from "./routes/stories.ts"
 import components from "./routes/components.ts"
 const prod = Deno.env.get("ENVIRONMENT") === "production"
@@ -21,6 +22,7 @@ server.addRoute("/", {
 server.addRoutes([
   { route: "/hello", handler: () => new Response("<code>.b,b! ~hello!</code>")},
   ...staticOnes, 
+  ...images,
   ...stories,
   ...components
 ])

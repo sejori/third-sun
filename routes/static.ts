@@ -18,4 +18,4 @@ export default files.map((file): Peko.Route => {
       })
     })
   }
-})
+}).filter(route => !route.route.includes("images"))

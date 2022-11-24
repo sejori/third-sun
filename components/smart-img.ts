@@ -34,16 +34,17 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
       const [width, height] = this.resolutions[i].split("x").map(s => Number(s))
       
       // basic check on screen - checking img or container forces dimension attributes
+      // double screen dimensions for high res displays
       if (
-        width > globalThis.innerWidth || 
-        height > globalThis.innerHeight
+        width > (globalThis.innerWidth*2) || 
+        height > (globalThis.innerHeight*2)
       ) break
 
       const newSrc = `${this.baseSrc}?${this.resParam}=${this.resolutions[i]}`
       this.src = newSrc
 
       while (!this.complete) {
-        // console.log(`loading ${newSrc}`)
+        console.log(`loading ${newSrc}`)
         await new Promise(res => setTimeout(res, 100))
       }
     }

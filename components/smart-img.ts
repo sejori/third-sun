@@ -44,7 +44,7 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
       this.src = newSrc
 
       while (!this.complete) {
-        console.log(`loading ${newSrc}`)
+        // console.log(`loading ${newSrc}`)
         await new Promise(res => setTimeout(res, 100))
       }
     }

@@ -1,7 +1,9 @@
 import * as Peko from "peko"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "fromFileUrl"
-import { transpileTs } from "../utils.ts"
+import { emit } from "emit"
+
+const decoder = new TextDecoder()
 
 const prod = Deno.env.get("ENVIRONMENT") === "production"
 const cache = new Peko.ResponseCache()
@@ -14,19 +16,17 @@ export default files.map((file): Peko.Route => {
   return {
     route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
-    handler: async (ctx) => {
-      const tsResponse = await Peko.staticHandler(fileUrl, {
-        headers: new Headers({ "Content-Type": "application/javascript" })
-      })(ctx)
-      const tsCode = await tsResponse.text()
-      const jsCode = await transpileTs(tsCode, fileUrl)
-      const { headers } = tsResponse;
-    
-      return new Response(jsCode, {
-        status: tsResponse.status,
-        statusText: tsResponse.statusText,
-        headers
-      })
-    }
+    handler: Peko.staticHandler(fileUrl, {
+      transform: async (content) => {
+        const urlStr = fileUrl.toString()
+        const result = await emit(urlStr, {
+          load(specifier: string) {
+            return Promise.resolve({ kind: 'module', specifier, content: decoder.decode(content) });
+          },
+        })
+        return result[urlStr]
+      },
+      headers: new Headers({ "Content-Type": "application/javascript" })
+    })
   }
 })

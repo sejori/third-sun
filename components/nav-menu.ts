@@ -61,7 +61,7 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
     console.log("toggleOpen", this)
 
     this.open = !this.open
-    this.classList.toggle("isOpen");
+    this.classList.toggle("isOpen")
 
     if (!this.onBody) this.home?.scrollIntoView({
       behavior: "smooth"

@@ -1,6 +1,5 @@
 import * as Peko from "peko"
 import { recursiveReaddir } from "recursiveReadDir"
-import { lookup } from "lookup"
 import { fromFileUrl } from "fromFileUrl"
 
 const prod = Deno.env.get("ENVIRONMENT") === "production"
@@ -13,12 +12,10 @@ export default files.map((file): Peko.Route => {
   return {
     route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
-    handler: Peko.staticHandler({
-      fileURL: new URL(`../${fileRoute}`, import.meta.url),
-      contentType: lookup(file),
+    handler: Peko.staticHandler(new URL(`../${fileRoute}`, import.meta.url), {
       headers: new Headers({
         "Cache-Control": "max-age=600, stale-while-revalidate=86400"
       })
     })
   }
-})
+}).filter(route => !route.route.includes("images"))

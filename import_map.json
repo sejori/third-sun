@@ -1,10 +1,10 @@
 {
   "imports": {
-    "peko": "https://deno.land/x/peko@v0.6.1/mod.ts",
+    "peko": "https://deno.land/x/peko@v1.2.1/mod.ts",
     "recursiveReadDir": "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts",
-    "lookup": "https://deno.land/x/media_types@v3.0.3/mod.ts",
     "fromFileUrl": "https://deno.land/std@0.150.0/path/mod.ts",
     "markdownit": "https://esm.sh/markdown-it@13.0.1",
-    "emit": "https://deno.land/x/emit@0.4.0/mod.ts"
+    "emit": "https://deno.land/x/emit@0.9.0/mod.ts",
+    "sharp": "npm:sharp"
   }
 }

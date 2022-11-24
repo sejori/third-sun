@@ -1,20 +1,19 @@
 import * as Peko from "peko"
 import staticOnes from "./routes/static.ts"
+import images from "./routes/images.ts"
 import stories from "./routes/stories.ts"
 import components from "./routes/components.ts"
+const prod = Deno.env.get("ENVIRONMENT") === "production"
 
 const server = new Peko.Server()
 server.use(Peko.logger)
 
 // index.html route
-server.addRoute({
-  route: "/",
+server.addRoute("/", {
   method: "GET",
-  handler: Peko.staticHandler({
-    fileURL: new URL("./index.html", import.meta.url),
-    contentType: "text/html",
+  handler: Peko.staticHandler(new URL("./index.html", import.meta.url), {
     headers: new Headers({
-      "Cache-Control": "max-age=600, stale-while-revalidate=86400"
+      "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
     })
   })
 })
@@ -23,6 +22,7 @@ server.addRoute({
 server.addRoutes([
   { route: "/hello", handler: () => new Response("<code>.b,b! ~hello!</code>")},
   ...staticOnes, 
+  ...images,
   ...stories,
   ...components
 ])

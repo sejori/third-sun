@@ -2,4 +2,5 @@
   "deno.enable": true,
   "deno.lint": true,
   "editor.tabSize": 2,
+  "rust-analyzer.*": true
 }

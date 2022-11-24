@@ -1,7 +1,9 @@
 import * as Peko from "peko"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "fromFileUrl"
-import sharp from "sharp"
+import { instantiate } from "../lib/rs_lib.generated.js";
+
+const { add } = await instantiate();
 
 const prod = Deno.env.get("ENVIRONMENT") === "production"
 const cache = new Peko.ResponseCache()
@@ -14,13 +16,14 @@ export default files.map((file): Peko.Route => {
     route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: async (ctx) => await Peko.staticHandler(new URL(`../${fileRoute}`, import.meta.url), {
-      transform: async (contents) => {
+      transform: (contents) => {
         const params = new URL(ctx.request.url).searchParams
         const resolution = params.get("resolution")
         if (!resolution || resolution.split("x").length !== 2) return contents
+
+        console.log(add(5, 10))
         
-        return await sharp(contents)
-          .resize(Number(resolution.split("x")[0]))
+        return contents
       },
       headers: new Headers({
         "Cache-Control": "max-age=600, stale-while-revalidate=86400"

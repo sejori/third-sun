@@ -435,14 +435,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rs_lib"
-version = "0.0.0"
-dependencies = [
- "image",
- "wasm-bindgen",
-]
-
-[[package]]
 name = "scoped_threadpool"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -498,6 +490,14 @@ dependencies = [
  "flate2",
  "jpeg-decoder",
  "weezl",
+]
+
+[[package]]
+name = "tjw_rust"
+version = "0.0.1"
+dependencies = [
+ "image",
+ "wasm-bindgen",
 ]
 
 [[package]]

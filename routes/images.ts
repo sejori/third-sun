@@ -1,10 +1,10 @@
 import * as Peko from "peko"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "fromFileUrl"
-import { instantiate } from "../lib/rs_lib.generated.js";
+import { instantiate } from "../lib/tjw_rust.generated.js";
 
 const { resize_image } = await instantiate();
-const ALLOWED_RESOLUTIONS = [400,600,800,1000,1200,1400,1600,1800,2000]
+const ALLOWED_RESOLUTIONS = [400,800,1200,1600]
 
 const cache = new Peko.ResponseCache()
 const files = await recursiveReaddir(fromFileUrl(new URL("../static/images", import.meta.url)))

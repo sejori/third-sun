@@ -11,12 +11,16 @@
 
 <body>
   <div class="container center">
-    <h1>Loading</h1>
+    <img src="/static/images/loading.gif" alt="Loading..." width="400">
+    <h4>Performing startup ritual...</h4>
   </div>
 
   <script>
     const sse = new EventSource("/reload-event")
-    sse.onmessage = (e) => window.location.reload()
+    sse.onmessage = (e) => {
+      console.log('reload received')
+      window.location.reload()
+    }
     sse.onerror = (e) => sse.close()
     document.body.addEventListener("unload", () => sse.close())
   </script>

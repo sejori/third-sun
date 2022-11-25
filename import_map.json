@@ -4,6 +4,7 @@
     "recursiveReadDir": "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts",
     "fromFileUrl": "https://deno.land/std@0.150.0/path/mod.ts",
     "markdownit": "https://esm.sh/markdown-it@13.0.1",
-    "emit": "https://deno.land/x/emit@0.9.0/mod.ts"
+    "emit": "https://deno.land/x/emit@0.9.0/mod.ts",
+    "deno-dom": "https://deno.land/x/deno_dom@v0.1.36-alpha/deno-dom-wasm-noinit.ts"
   }
 }

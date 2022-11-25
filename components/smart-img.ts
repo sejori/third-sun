@@ -28,7 +28,6 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
   // }
 
   async beginLoading() {
-    // console.log("here", this.resolutions)
     if (!this.resolutions[0]) {
       // console.log(`requesting ${this.baseSrc}`)
       this.src = this.baseSrc
@@ -36,9 +35,7 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
 
     for (let i = 0; i < this.resolutions.length; i++) {
       const [width, height] = this.resolutions[i].split("x").map(s => Number(s))
-      
-      // basic check on screen - checking img or container forces dimension attributes
-      // increased screen dimensions for high res displays
+      // limit to reasonable res for screen (doubled for high density displays)
       if (
         width > (globalThis.innerWidth*2) || 
         height > (globalThis.innerHeight*2)
@@ -48,7 +45,7 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
       this.src = newSrc
 
       while (!this.complete) {
-        console.log(`loading ${newSrc}`)
+        // console.log(`loading ${newSrc}`)
         await new Promise(res => setTimeout(res, 100))
       }
     }

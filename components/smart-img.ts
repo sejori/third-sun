@@ -37,8 +37,9 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
       const [width, height] = this.resolutions[i].split("x").map(s => Number(s))
       // limit to reasonable res for screen (doubled for high density displays)
       if (
-        width > (globalThis.innerWidth*2) || 
-        height > (globalThis.innerHeight*2)
+        i > 0 &&
+        (width > (globalThis.innerWidth*2) || 
+        height > (globalThis.innerHeight*2))
       ) break
 
       const newSrc = `${this.baseSrc}?${this.resParam}=${this.resolutions[i]}`

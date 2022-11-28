@@ -30,6 +30,8 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
   // }
 
   async beginLoading() {
+    // find appropriate resolution to load
+    let finalRes = ""
     for (const [key, value] of IMG_RESOLUTIONS) {
       const width = value, height = value
 
@@ -40,12 +42,13 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
         height > (globalThis.innerHeight*2))
       ) break
 
-      while (!this.complete) await new Promise(res => setTimeout(res, 100))
-
-      const newSrc = `${this.baseSrc}?res=${key}`
-      console.log(newSrc)
-      this.src = newSrc
+      finalRes = key
     }
+
+    while (!this.complete) await new Promise(res => setTimeout(res, 100))
+
+    const newSrc = `${this.baseSrc}?res=${finalRes}`
+    this.src = newSrc
   }
 }, {
   extends: "img"

@@ -30,8 +30,8 @@ const imageRoutes = images.map((file): Peko.Route => {
   }
 })
 
-const style = await recursiveReaddir(fromFileUrl(new URL("./static/style", import.meta.url)))
-const styleRoutes = style.map((file): Peko.Route => {
+const scripts = await recursiveReaddir(fromFileUrl(new URL("./static/scripts", import.meta.url)))
+const scriptRoutes = scripts.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
@@ -53,9 +53,22 @@ const storyRoutes = await Promise.all(stories.filter(story => story.includes(".m
   }
 }))
 
+const style = await recursiveReaddir(fromFileUrl(new URL("./static/style", import.meta.url)))
+const styleRoutes = style.map((file): Peko.Route => {
+  const fileRoute = file.slice(Deno.cwd().length+1)
+  return {
+    route: `/${fileRoute}`,
+    middleware: prod ? Peko.cacher(cache) : [],
+    handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), {
+      headers: new Headers({ "Cache-Control": "max-age=600, stale-while-revalidate=86400" })
+    })
+  }
+})
+
 export default [ 
   ...componentRoutes, 
   ...imageRoutes,
-  ...styleRoutes,
-  ...storyRoutes
+  ...scriptRoutes,
+  ...storyRoutes,
+  ...styleRoutes
 ]

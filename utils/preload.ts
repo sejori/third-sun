@@ -15,16 +15,10 @@ export const preloadPageImages = async (pageFileUrl: URL, server: Server) => {
   const srcs: string[] = []
   imgs?.forEach(img => {
     if (img.getAttribute("is") === "smart-img") {
-      const baseSrc = img.getAttribute("data-src")
-      const resolutions = JSON.parse(img.getAttribute("data-resolutions") || "[]")
-
-      resolutions.forEach((res: string) => srcs.push(`${baseSrc}?resolution=${res}`))
-      srcs.push(baseSrc || "")
-    } else {
       srcs.push(img.getAttribute("src") || "")
     }
   })
-  console.log(srcs)
+  // console.log(srcs)
   const srcUrls = srcs.filter(src => src).map(src => new URL(`http://${server.hostname}:${server.port}${src}`))
   
   return await Promise.all(srcUrls.map(url => server.requestHandler(new Request(url))))
@@ -44,7 +38,7 @@ export const preloadPageComponents = async (pageFileUrl: URL, server: Server) =>
       srcs.push(img.getAttribute("src") || "")
     }
   })
-  console.log(srcs)
+  // console.log(srcs)
   const srcUrls = srcs.filter(src => src).map(src => new URL(`http://${server.hostname}:${server.port}${src}`))
   
   return await Promise.all(srcUrls.map(url => server.requestHandler(new Request(url))))

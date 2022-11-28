@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/static/style/parallax.css">
 
   <!-- polyfill for safari - https://stackoverflow.com/questions/67466609/customizable-built-in-elements-on-safari-polyfill-via-script-tag-vs-es6-import -->
-  <script src="//unpkg.com/@ungap/custom-elements/es.js" async></script>
+  <script src="/static/scripts/custom-elements-shim.js" async></script>
   <script type="module" src="/components/smart-img.ts" async></script>
   <script type="module" src="/components/nav-menu.ts" async></script>
 </head>
@@ -21,10 +21,10 @@
 <body>
   <div class="parallax">
     <header class="parallax__group">
-      <img is="smart-img" class="parallax__layer deep" data-src="/static/images/header-bg/BLUE_LOGO-min.png" data-resolutions='["800x800", "1600x1600", "full"]'>
-      <img is="smart-img" class="parallax__layer background" data-src="/static/images/header-bg/BLUE_BACKGROUND-min.png" data-resolutions='["800x800", "1600x1600", "full"]'>
-      <img is="smart-img" class="parallax__layer midground" data-src="/static/images/header-bg/BLUE_MIDGROUND-min.png" data-resolutions='["800x800", "1600x1600", "full"]'>
-      <img is="smart-img" class="parallax__layer foreground" data-src="/static/images/header-bg/BLUE_FOREGROUND-min.png" data-resolutions='["800x800", "1600x1600", "full"]'>
+      <img is="smart-img" class="parallax__layer deep" src="/static/images/header-bg/BLUE_LOGO-min.png?res=low">
+      <img is="smart-img" class="parallax__layer background" src="/static/images/header-bg/BLUE_BACKGROUND-min.png?res=low">
+      <img is="smart-img" class="parallax__layer midground" src="/static/images/header-bg/BLUE_MIDGROUND-min.png?res=low">
+      <img is="smart-img" class="parallax__layer foreground" src="/static/images/header-bg/BLUE_FOREGROUND-min.png?res=low">
     </header>
 
     <section id="info" class="fade parallax__group">
@@ -55,37 +55,37 @@
 
     <section class="parallax__group">
       <div class="container wide foreground">
-        <img is="smart-img" style="width: 500px; align-self: flex-start;" alt="Page3" data-src="/static/images/showcase/Page3.png" data-resolutions='["400x400", "800x800", "1200x1200"]' data-triggerevent="nav-menu_move-to-body">
+        <img is="smart-img" style="width: 500px; align-self: flex-start;" alt="Page3" src="/static/images/showcase/Page3.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
       </div>
       <div class="container wide background">
-        <img is="smart-img" style="width: 480px; align-self: flex-end;" data-src="/static/images/showcase/Page1.png" alt="Page1" data-resolutions='["400x400", "800x800"]' data-triggerevent="nav-menu_move-to-body">
+        <img is="smart-img" style="width: 480px; align-self: flex-end;"  alt="Page1" src="/static/images/showcase/Page1.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
       </div>
     </section>
 
     <section class="parallax__group">
       <div class="container wide foreground">
-        <img is="smart-img" style="width: 480px; align-self: flex-start;" data-src="/static/images/showcase/birds.png" alt="birds" data-resolutions='["400x400", "800x800"]' data-triggerevent="nav-menu_move-to-body">
+        <img is="smart-img" style="width: 480px; align-self: flex-start;" alt="birds" src="/static/images/showcase/birds.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
       </div>
       <div class="container wide background">
-        <img is="smart-img" style="width: 480px; align-self: flex-start;" data-src="/static/images/showcase/Page2.png" alt="Pag21" data-resolutions='["400x400", "800x800"]' data-triggerevent="nav-menu_move-to-body">
+        <img is="smart-img" style="width: 480px; align-self: flex-start;" alt="Pag21" src="/static/images/showcase/Page2.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
       </div>
     </section>
 
     <section class="parallax__group">
       <div class="container wide foreground">
-        <img is="smart-img" style="width: 910px; align-self: flex-end;" data-src="/static/images/showcase/stop_vampyre.png" alt="stop_vampyre" data-resolutions='["400x400", "800x800", "1200x1200"]' data-triggerevent="nav-menu_move-to-body">
+        <img is="smart-img" style="width: 910px; align-self: flex-end;" alt="stop_vampyre" src="/static/images/showcase/stop_vampyre.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
       </div>
       <div class="container wide background">
-        <img is="smart-img" style="width: 480px; align-self: flex-start;" data-src="/static/images/showcase/FACE.png" alt="FACE" data-resolutions='["400x400", "800x800"]' data-triggerevent="nav-menu_move-to-body">
+        <img is="smart-img" style="width: 480px; align-self: flex-start;" alt="FACE" src="/static/images/showcase/FACE.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
       </div>
     </section>
 
     <section class="parallax__group">
       <div class="container wide foreground">
-        <img is="smart-img" style="width: 480px; align-self: flex-end;" data-src="/static/images/showcase/deer.png" alt="deer" data-resolutions='["400x400", "800x800"]' data-triggerevent="nav-menu_move-to-body">
+        <img is="smart-img" style="width: 480px; align-self: flex-end;" alt="deer" src="/static/images/showcase/deer.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
       </div>
       <div class="container wide background">
-        <img is="smart-img" style="width: 910px; align-self: flex-end;" data-src="/static/images/showcase/Logo-rectangle.png" alt="Logo-rectangle" data-resolutions='["400x400", "800x800", "1200x1200"]' data-triggerevent="nav-menu_move-to-body">
+        <img is="smart-img" style="width: 910px; align-self: flex-end;" alt="Logo-rectangle" src="/static/images/showcase/Logo-rectangle.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
       </div>
     </section>
 

@@ -1,8 +1,4 @@
-export const IMG_RESOLUTIONS = new Map();
-IMG_RESOLUTIONS.set("low", 800);
-IMG_RESOLUTIONS.set("med", 1200);
-IMG_RESOLUTIONS.set("high", 1600);
-IMG_RESOLUTIONS.set("full", 2000);
+import { IMG_RESOLUTIONS } from "./config.ts"
 
 customElements.define('smart-img', class SmartImg extends HTMLImageElement {
   triggerEvent: string | undefined
@@ -33,19 +29,13 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
     // find appropriate resolution to load
     let finalRes = ""
     for (const [key, value] of IMG_RESOLUTIONS) {
-      const width = value, height = value
-
       // limit to reasonable res for screen (doubled for high density displays)
       if (
-        !this.src.includes(key) && 
-        (width > (globalThis.innerWidth*2) || 
-        height > (globalThis.innerHeight*2))
-      ) break
-
-      finalRes = key
+        value < (globalThis.innerWidth*2) || value < (globalThis.innerHeight*2)
+      ) finalRes = key
     }
 
-    while (!this.complete) await new Promise(res => setTimeout(res, 100))
+    while (!this.complete) await new Promise(res => setTimeout(res, 250))
 
     const newSrc = `${this.baseSrc}?res=${finalRes}`
     this.src = newSrc

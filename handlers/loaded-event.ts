@@ -23,10 +23,8 @@ export const loadedEvent = (server: Server) => (ctx: RequestContext) => {
     preloadPageComponents(indexUrl, server),
     preloadPageImages(indexUrl, server)
   ]).then(_ => {
-    console.log("in preload cb")
     server.removeRoute("/")
     server.addRoute("/", {
-      method: "GET",
       handler: staticHandler(indexUrl, {
         headers: new Headers({
           "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""

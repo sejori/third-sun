@@ -9,7 +9,6 @@ server.use(Peko.logger)
 
 // initial loading page
 server.addRoute("/", {
-  method: "GET",
   handler: Peko.staticHandler(new URL("./loading.html", import.meta.url), {
     headers: new Headers({
       "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""

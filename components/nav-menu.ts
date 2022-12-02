@@ -1,4 +1,4 @@
-customElements.define('nav-menu', class NavMenu extends HTMLElement {
+class NavMenu extends HTMLElement {
   home = this.parentElement
   ogHeight = this.style.height
   ogWidth = this.style.width
@@ -80,6 +80,10 @@ customElements.define('nav-menu', class NavMenu extends HTMLElement {
       }
     }
   }
-}, {
-  extends: "nav"
+}
+
+globalThis.addEventListener("load", () => {
+  customElements.define('nav-menu', NavMenu, {
+    extends: "nav"
+  })
 });

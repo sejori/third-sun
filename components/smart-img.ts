@@ -1,6 +1,6 @@
 import { IMG_RESOLUTIONS } from "./config.ts"
 
-customElements.define('smart-img', class SmartImg extends HTMLImageElement {
+class SmartImg extends HTMLImageElement {
   triggerEvent: string | undefined
   baseSrc: string
 
@@ -40,6 +40,10 @@ customElements.define('smart-img', class SmartImg extends HTMLImageElement {
     const newSrc = `${this.baseSrc}?res=${finalRes}`
     this.src = newSrc
   }
-}, {
-  extends: "img"
+}
+
+globalThis.addEventListener("load", () => {
+  customElements.define('smart-img', SmartImg, {
+    extends: "img"
+  })
 });

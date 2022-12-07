@@ -5,7 +5,7 @@ import { loadedEvent } from "./handlers/loaded-event.ts"
 export const prod = Deno.env.get("ENVIRONMENT") === "production"
 
 const server = new Peko.Server()
-server.use(Peko.logger)
+server.use(Peko.logger(console.log))
 
 // initial loading page
 server.addRoute("/", {

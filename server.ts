@@ -18,7 +18,7 @@ server.addRoute("/", {
 
 // setup reload event route to trigger image preloading
 // swaps route to index and reload on completion
-server.addRoute("/reload-event", { handler: loadedEvent(server) })
+server.addRoute("/reload-event", loadedEvent(server))
 
 // all other routes from "./routes.ts"
 server.addRoutes(routes)

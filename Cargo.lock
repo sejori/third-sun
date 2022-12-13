@@ -497,6 +497,7 @@ name = "tjw_rust"
 version = "0.0.1"
 dependencies = [
  "image",
+ "js-sys",
  "wasm-bindgen",
 ]
 

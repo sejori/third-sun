@@ -43,3 +43,12 @@ export const preloadPageComponents = async (pageFileUrl: URL, server: Server) =>
   
   return await Promise.all(srcUrls.map(url => server.requestHandler(new Request(url))))
 }
+
+export const preloadIndex = (server: Server) => {
+  const indexUrl = new URL("../index.html", import.meta.url)
+
+  return Promise.all([
+    preloadPageComponents(indexUrl, server),
+    preloadPageImages(indexUrl, server)
+  ])
+}

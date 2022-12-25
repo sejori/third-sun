@@ -1,14 +1,49 @@
 import * as Peko from "peko"
+import { Store } from "super_cereal"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "fromFileUrl"
 
 import { bundleTs } from "./handlers/bundle-ts.ts"
 import { markdown } from "./handlers/markdown.ts"
 import { resizableImage } from "./handlers/resizable-image.ts"
+import { loadEvent } from "./handlers/load-index.ts"
 
-const prod = Deno.env.get("ENVIRONMENT") === "production"
-const cache = new Peko.ResponseCache()
+const decoder = new TextDecoder()
+const initCacheMap: Map<string, string> = new Map()
+let rootId = ""
+
+for await (const dirEntry of Deno.readDir("./precache")) {
+  initCacheMap.set(dirEntry.name.split(".")[0], decoder.decode(await Deno.readFile(`./precache/${dirEntry.name}`)))
+  if (dirEntry.name === "root.txt") rootId = initCacheMap.get(dirEntry.name.split(".")[0])!
+}
+const store = new Store(initCacheMap)
+console.log(store)
+const initCacheItems = await store.load(rootId)
+
+// const prod = Deno.env.get("ENVIRONMENT") === "production"
+const prod = true
+export const cache = new Peko.ResponseCache({
+  items: initCacheItems
+})
+
+console.log(cache)
 const htmlDoc = await Deno.readTextFile(new URL("./index.html", import.meta.url))
+
+// pre-loading routes
+const preloadRoutes: Peko.Route[] = [
+  {
+    route: "/",
+    handler: Peko.staticHandler(new URL("./loading.html", import.meta.url), {
+      headers: new Headers({
+        "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
+      })
+    })
+  },
+  {
+    route: "/reload-event",
+    handler: loadEvent
+  }
+]
 
 const components = await recursiveReaddir(fromFileUrl(new URL("./components", import.meta.url)))
 const componentRoutes = components.map((file): Peko.Route => {
@@ -65,7 +100,8 @@ const styleRoutes = style.map((file): Peko.Route => {
   }
 })
 
-export default [ 
+export const routes = [ 
+  ...preloadRoutes,
   ...componentRoutes, 
   ...imageRoutes,
   ...scriptRoutes,

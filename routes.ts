@@ -10,17 +10,30 @@ import { resizableImage } from "./handlers/resizable-image.ts"
 const decoder = new TextDecoder()
 const initCacheMap: Map<string, string> = new Map()
 let rootId = ""
-let initCacheItems = []
+let initCacheItems: { key: string, value: Response }[] = []
 
 // CACHE SETUP
 // try catch as won't exist at first
 try {
   for await (const dirEntry of Deno.readDir("./precache")) {
-    initCacheMap.set(dirEntry.name.split(".")[0], decoder.decode(await Deno.readFile(`./precache/${dirEntry.name}`)))
-    if (dirEntry.name === "root.txt") rootId = initCacheMap.get(dirEntry.name.split(".")[0])!
+    const key = dirEntry.name.split(".txt")[0]
+    const value = decoder.decode(await Deno.readFile(`./precache/${dirEntry.name}`))
+
+    if (key === "root") {
+      rootId = value
+      break
+    }
+
+    initCacheMap.set(key, value)
   }
+
   const store = new Store(initCacheMap)
-  initCacheItems = await store.load(rootId)
+  const storeItems = await store.load(rootId)
+  // deno-lint-ignore no-explicit-any
+  initCacheItems = storeItems.map((item: any) => {
+    console.log(item)
+    return { key: item.key, value: item.value }
+  })
 } catch (e) {
   console.log(e)
 }

@@ -11,14 +11,19 @@ import { loadEvent } from "./handlers/load-index.ts"
 const decoder = new TextDecoder()
 const initCacheMap: Map<string, string> = new Map()
 let rootId = ""
+let initCacheItems = []
 
-for await (const dirEntry of Deno.readDir("./precache")) {
-  initCacheMap.set(dirEntry.name.split(".")[0], decoder.decode(await Deno.readFile(`./precache/${dirEntry.name}`)))
-  if (dirEntry.name === "root.txt") rootId = initCacheMap.get(dirEntry.name.split(".")[0])!
+// try catch as won't exist at first
+try {
+  for await (const dirEntry of Deno.readDir("./precache")) {
+    initCacheMap.set(dirEntry.name.split(".")[0], decoder.decode(await Deno.readFile(`./precache/${dirEntry.name}`)))
+    if (dirEntry.name === "root.txt") rootId = initCacheMap.get(dirEntry.name.split(".")[0])!
+  }
+  const store = new Store(initCacheMap)
+  initCacheItems = await store.load(rootId)
+} catch (e) {
+  console.log(e)
 }
-const store = new Store(initCacheMap)
-console.log(store)
-const initCacheItems = await store.load(rootId)
 
 // const prod = Deno.env.get("ENVIRONMENT") === "production"
 const prod = true

@@ -3,6 +3,7 @@ import {
   initParser,
 } from "deno-dom"
 import { Server } from "peko"
+import { IMG_RESOLUTIONS } from "../components/config.ts"
 
 export const preloadPageImages = async (pageFileUrl: URL, server: Server) => {
   await initParser()
@@ -15,10 +16,13 @@ export const preloadPageImages = async (pageFileUrl: URL, server: Server) => {
   const srcs: string[] = []
   imgs?.forEach(img => {
     if (img.getAttribute("is") === "smart-img") {
-      srcs.push(img.getAttribute("src") || "")
+      const src = img.getAttribute("src")!.split("?")[0]
+      IMG_RESOLUTIONS.forEach((_, key) => {
+        srcs.push(`${src}?res=${key}`)
+      })
     }
   })
-  // console.log(srcs)
+
   const srcUrls = srcs.filter(src => src).map(src => new URL(`http://${server.hostname}:${server.port}${src}`))
   
   return await Promise.all(srcUrls.map(url => server.requestHandler(new Request(url))))

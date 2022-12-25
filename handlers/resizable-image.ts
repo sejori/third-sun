@@ -15,6 +15,7 @@ export const resizableImage =  (fileRoute: string) => async (ctx: RequestContext
 
     if (!res) return contents
 
+    console.log("Resizing " + fileRoute + " to res: " + res)
     return resize_image(contents, res, res)
   },
   headers: new Headers({

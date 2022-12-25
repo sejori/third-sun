@@ -61,3 +61,4 @@ jobs:
         with:
           project: iiisun.art
           entrypoint: server.ts
+          root: ./

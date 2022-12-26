@@ -3,8 +3,6 @@ import { routes } from "./routes.ts"
 
 const server = new Peko.Server()
 
-server.use(() => { throw new Error("poop") })
-
 server.use(Peko.logger(console.log))
 
 server.addRoutes(routes)

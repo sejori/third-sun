@@ -3,13 +3,9 @@ import { routes } from "./routes.ts"
 
 const server = new Peko.Server()
 
-server.use(Peko.logger(console.log))
+server.use(() => { throw new Error("poop") })
 
-// server.use(async (_, next) => {
-//   const response = await next()
-//   const clone = response!.clone()
-//   console.log(await clone.text())
-// })
+server.use(Peko.logger(console.log))
 
 server.addRoutes(routes)
 

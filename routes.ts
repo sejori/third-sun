@@ -31,7 +31,6 @@ try {
   const storeItems = await store.load(rootId)
   // deno-lint-ignore no-explicit-any
   initCacheItems = storeItems.map((item: any) => {
-    console.log(item)
     return { key: item.key, value: item.value }
   })
 } catch (e) {
@@ -44,7 +43,6 @@ export const cache = new Peko.ResponseCache({
   items: initCacheItems
 })
 
-console.log(cache)
 const indexUrl = new URL("./index.html", import.meta.url)
 const htmlDoc = await Deno.readTextFile(indexUrl)
 

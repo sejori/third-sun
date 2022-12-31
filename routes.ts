@@ -1,11 +1,11 @@
 import * as Peko from "peko"
 import { Store } from "super_cereal"
 import { recursiveReaddir } from "recursiveReadDir"
-import { fromFileUrl } from "fromFileUrl"
+import { fromFileUrl } from "path"
 
-import { bundleTs } from "./handlers/bundle-ts.ts"
+import { emitTS } from "./handlers/emit-ts.ts"
 // import { markdown } from "./handlers/markdown.ts"
-import { resizableImage } from "./handlers/resizable-image.ts"
+import { resizableImage } from "./handlers/resize-image.ts"
 
 const decoder = new TextDecoder()
 const initCacheMap: Map<string, string> = new Map()
@@ -13,7 +13,6 @@ let rootId = ""
 let initCacheItems: { key: string, value: Response }[] = []
 
 // CACHE SETUP
-// try catch as won't exist at first
 try {
   for await (const dirEntry of Deno.readDir("./precache")) {
     const key = dirEntry.name.split(".txt")[0]
@@ -44,7 +43,7 @@ export const cache = new Peko.ResponseCache({
 })
 
 const indexUrl = new URL("./index.html", import.meta.url)
-const htmlDoc = await Deno.readTextFile(indexUrl)
+// const htmlDoc = await Deno.readTextFile(indexUrl)
 
 // pre-loading routes
 const indexPage: Peko.Route = {
@@ -62,7 +61,7 @@ const componentRoutes = components.map((file): Peko.Route => {
   return {
     route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
-    handler: bundleTs(new URL(`./${fileRoute}`, import.meta.url))
+    handler: emitTS(new URL(`./${fileRoute}`, import.meta.url))
   }
 })
 

@@ -3,7 +3,7 @@ import { emit } from "emit"
 
 const decoder = new TextDecoder()
 
-export const bundleTs = (fileUrl: URL) => staticHandler(fileUrl, {
+export const emitTS = (fileUrl: URL) => staticHandler(fileUrl, {
   transform: async (content) => {
     const result = await emit(fileUrl, {
       load(specifier: string) {

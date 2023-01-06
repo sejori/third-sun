@@ -1,7 +1,7 @@
 import * as Peko from "peko"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
-import { loadPrecache } from "./utils/loadcache.ts"
+import { loadPrecache } from "./utils/load_precache.ts"
 import { emitTS } from "./handlers/emit-ts.ts"
 import { resizableImage } from "./handlers/resize-image.ts"
 // import { markdown } from "./handlers/markdown.ts"

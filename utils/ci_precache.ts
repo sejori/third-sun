@@ -1,6 +1,6 @@
-import { Server, ResponseCache } from "peko"
+import { Server } from "peko"
 import { Store } from "super_cereal"
-import router from "../router.ts"
+import router, { cache } from "../router.ts"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
 
@@ -10,7 +10,6 @@ const encoder = new TextEncoder()
 
 // dummy server for generating cache
 const server = new Server()
-const cache = new ResponseCache()
 server.addRoutes(router.routes)
 
 // set up super_cereal store

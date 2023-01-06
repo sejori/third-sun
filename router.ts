@@ -8,7 +8,7 @@ import { resizableImage } from "./handlers/resize-image.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
 const router = new Peko.Router()
-const prod = true // const prod = Deno.env.get("ENVIRONMENT") === "production"
+const prod = Deno.env.get("ENVIRONMENT") === "production"
 const cache = new Peko.ResponseCache()
 
 const loadingUrl = new URL("./loading.html", import.meta.url)
@@ -23,7 +23,7 @@ router.addRoute("/", Peko.staticHandler(loadingUrl, {
 }))
 
 router.addRoute("/load-event", Peko.sseHandler(loadTarget))
-loadPrecache(cache).then(() => {
+if (prod) loadPrecache(cache).then(() => {
   router.removeRoute("/")
   router.removeRoute("/load-event")
 
@@ -32,7 +32,7 @@ loadPrecache(cache).then(() => {
       "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
     })
   }))
-  router.addRoute("/load-event", () => console.log("in new load event"), () => Response.redirect("/", 302))
+  router.addRoute("/load-event", () => Response.redirect("/", 302))
 
   loadTarget.dispatchEvent(new CustomEvent("send", { detail: "loaded" }))
 })
@@ -93,3 +93,4 @@ router.addRoutes(style.map((file): Peko.Route => {
 }))
 
 export default router
+export { cache }

@@ -1,82 +1,61 @@
 import * as Peko from "peko"
-import { Store } from "super_cereal"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
-
+import { loadPrecache } from "./utils/loadcache.ts"
 import { emitTS } from "./handlers/emit-ts.ts"
 // import { markdown } from "./handlers/markdown.ts"
 import { resizableImage } from "./handlers/resize-image.ts"
 
-const decoder = new TextDecoder()
-const initCacheMap: Map<string, string> = new Map()
-let rootId = ""
-let initCacheItems: { key: string, value: Response }[] = []
-
-// CACHE SETUP
-try {
-  for await (const dirEntry of Deno.readDir("./precache")) {
-    const key = dirEntry.name.split(".txt")[0]
-    const value = decoder.decode(await Deno.readFile(`./precache/${dirEntry.name}`))
-
-    if (key === "root") {
-      rootId = value
-      break
-    }
-
-    initCacheMap.set(key, value)
-  }
-
-  const store = new Store(initCacheMap)
-  const storeItems = await store.load(rootId)
-  // deno-lint-ignore no-explicit-any
-  initCacheItems = storeItems.map((item: any) => {
-    return { key: item.key, value: item.value }
-  })
-} catch (e) {
-  console.log(e)
-}
-
+const router = new Peko.Router()
 // const prod = Deno.env.get("ENVIRONMENT") === "production"
 const prod = true
-export const cache = new Peko.ResponseCache({
-  items: initCacheItems
-})
+const cache = new Peko.ResponseCache()
 
+const loadingUrl = new URL("./loading.html", import.meta.url)
 const indexUrl = new URL("./index.html", import.meta.url)
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
-// pre-loading routes
-const indexPage: Peko.Route = {
-  route: "/",
-  handler: Peko.staticHandler(indexUrl, {
+// loading page -> index page
+const loadTarget = new EventTarget()
+router.addRoute("/", Peko.staticHandler(loadingUrl, {
+  headers: new Headers({
+    "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
+  })
+}))
+router.addRoute("/load-event", Peko.sseHandler(loadTarget))
+loadPrecache(cache).then(() => {
+  router.removeRoute("/")
+  router.addRoute("/", Peko.staticHandler(indexUrl, {
     headers: new Headers({
       "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
     })
-  })
-}
+  }))
+  console.log("loaded")
+  loadTarget.dispatchEvent(new CustomEvent("send", { detail: "loaded" }))
+})
 
 const components = await recursiveReaddir(fromFileUrl(new URL("./components", import.meta.url)))
-const componentRoutes = components.map((file): Peko.Route => {
+router.addRoutes(components.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: emitTS(new URL(`./${fileRoute}`, import.meta.url))
   }
-})
+}))
 
 const images = await recursiveReaddir(fromFileUrl(new URL("./static/images", import.meta.url)))
-const imageRoutes = images.map((file): Peko.Route => {
+router.addRoutes(images.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
     middleware: Peko.cacher(cache),
     handler: resizableImage(fileRoute)
   }
-})
+}))
 
 const scripts = await recursiveReaddir(fromFileUrl(new URL("./static/scripts", import.meta.url)))
-const scriptRoutes = scripts.map((file): Peko.Route => {
+router.addRoutes(scripts.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
@@ -85,7 +64,7 @@ const scriptRoutes = scripts.map((file): Peko.Route => {
       headers: new Headers({ "Cache-Control": "max-age=600, stale-while-revalidate=86400" })
     })
   }
-})
+}))
 
 // const stories = await recursiveReaddir(fromFileUrl(new URL("./static/stories", import.meta.url)))
 // const storyRoutes = await Promise.all(stories.filter(story => story.includes(".md")).map(async (file): Promise<Peko.Route> => {
@@ -99,7 +78,7 @@ const scriptRoutes = scripts.map((file): Peko.Route => {
 // }))
 
 const style = await recursiveReaddir(fromFileUrl(new URL("./static/style", import.meta.url)))
-const styleRoutes = style.map((file): Peko.Route => {
+router.addRoutes(style.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
@@ -108,13 +87,6 @@ const styleRoutes = style.map((file): Peko.Route => {
       headers: new Headers({ "Cache-Control": "max-age=600, stale-while-revalidate=86400" })
     })
   }
-})
+}))
 
-export const routes = [ 
-  indexPage,
-  ...componentRoutes, 
-  ...imageRoutes,
-  ...scriptRoutes,
-  // ...storyRoutes,
-  ...styleRoutes
-]
+export default router

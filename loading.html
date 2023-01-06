@@ -18,7 +18,7 @@
   </div>
 
   <script>
-    const sse = new EventSource("/reload-event")
+    const sse = new EventSource("/load-event")
     sse.onmessage = (e) => {
       console.log('reload received')
       window.location.reload()

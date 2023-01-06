@@ -9,6 +9,8 @@ import { resizableImage } from "./handlers/resize-image.ts"
 
 const router = new Peko.Router()
 const prod = Deno.env.get("ENVIRONMENT") === "production"
+console.log("PROD:" + prod)
+
 const cache = new Peko.ResponseCache()
 
 const loadingUrl = new URL("./loading.html", import.meta.url)
@@ -23,7 +25,7 @@ router.addRoute("/", Peko.staticHandler(loadingUrl, {
 }))
 
 router.addRoute("/load-event", Peko.sseHandler(loadTarget))
-if (prod) loadPrecache(cache).then(() => {
+loadPrecache(cache).then(() => {
   router.removeRoute("/")
   router.removeRoute("/load-event")
 

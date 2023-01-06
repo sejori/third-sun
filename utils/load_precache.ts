@@ -15,7 +15,7 @@ export const loadPrecache = async (cache: ResponseCache) => {
     })
   })
 
-  if (!items) return
+  if (!items[0]) return
 
   items.forEach(({ key, value }) => {
     if (key === "root") {

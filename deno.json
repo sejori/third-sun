@@ -1,9 +1,9 @@
 {
   "tasks": {
+    "wasmbuild": "deno run -A https://deno.land/x/wasmbuild@0.10.0/main.ts",
+    "ci": "deno run --allow-read --allow-write --allow-net --allow-env utils/ci_precache.ts",
     "start": "deno run --allow-net --allow-read --allow-env --unstable server.ts",
-    "precache": "deno run --allow-read --allow-write --allow-net --allow-env utils/ci_precache.ts",
-    "start:dev": "deno run --allow-net --allow-read --allow-env --unstable --watch server.ts",
-    "wasmbuild": "deno run -A https://deno.land/x/wasmbuild@0.10.0/main.ts"
+    "start:dev": "deno run --allow-net --allow-read --allow-env --unstable --watch server.ts"
   },
   "importMap": "import_map.json",
   "fmt": {

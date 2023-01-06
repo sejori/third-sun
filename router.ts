@@ -3,17 +3,16 @@ import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
 import { loadPrecache } from "./utils/loadcache.ts"
 import { emitTS } from "./handlers/emit-ts.ts"
-// import { markdown } from "./handlers/markdown.ts"
 import { resizableImage } from "./handlers/resize-image.ts"
+// import { markdown } from "./handlers/markdown.ts"
+// const htmlDoc = await Deno.readTextFile(indexUrl)
 
 const router = new Peko.Router()
-// const prod = Deno.env.get("ENVIRONMENT") === "production"
-const prod = true
+const prod = true // const prod = Deno.env.get("ENVIRONMENT") === "production"
 const cache = new Peko.ResponseCache()
 
 const loadingUrl = new URL("./loading.html", import.meta.url)
 const indexUrl = new URL("./index.html", import.meta.url)
-// const htmlDoc = await Deno.readTextFile(indexUrl)
 
 // loading page -> index page
 const loadTarget = new EventTarget()
@@ -22,15 +21,19 @@ router.addRoute("/", Peko.staticHandler(loadingUrl, {
     "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
   })
 }))
+
 router.addRoute("/load-event", Peko.sseHandler(loadTarget))
 loadPrecache(cache).then(() => {
   router.removeRoute("/")
+  router.removeRoute("/load-event")
+
   router.addRoute("/", Peko.staticHandler(indexUrl, {
     headers: new Headers({
       "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
     })
   }))
-  console.log("loaded")
+  router.addRoute("/load-event", () => console.log("in new load event"), () => Response.redirect("/", 302))
+
   loadTarget.dispatchEvent(new CustomEvent("send", { detail: "loaded" }))
 })
 

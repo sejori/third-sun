@@ -1,5 +1,5 @@
 import * as Peko from "peko"
-import router from "./routes.ts"
+import router from "./router.ts"
 
 const server = new Peko.Server()
 
@@ -13,6 +13,7 @@ server.use(async (_, next) => {
  }
 })
 
-server.addRoutes(router.routes)
+// not using addRoutes as modifying routes from router.ts
+server.routes = router.routes
 
 server.listen(3000) //  say hello Rabbit boi .b,b!

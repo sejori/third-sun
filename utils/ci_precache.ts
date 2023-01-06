@@ -1,6 +1,6 @@
 import { Server, ResponseCache } from "peko"
 import { Store } from "super_cereal"
-import router from "../routes.ts"
+import router from "../router.ts"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
 

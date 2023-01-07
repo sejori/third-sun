@@ -8,7 +8,7 @@ import { resizableImage } from "./handlers/resize-image.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
 const router = new Peko.Router()
-const prod = Deno.env.get("ENVIRONMENT") === "production"
+const prod = Deno.env.get("DENO_DEPLOYMENT_ID")
 console.log("PROD:" + prod)
 
 const cache = new Peko.ResponseCache()
@@ -27,7 +27,7 @@ router.addRoute("/", Peko.staticHandler(loadingUrl, {
 router.addRoute("/load-event", Peko.sseHandler(loadTarget))
 loadPrecache(cache).then(() => {
   console.log("loaded precache")
-  
+
   router.removeRoute("/")
   router.removeRoute("/load-event")
 

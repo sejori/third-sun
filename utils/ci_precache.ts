@@ -28,7 +28,7 @@ try {
 } catch(e) { console.log(e) }
 
 // generate request addresses for images and components
-const imgFiles = await recursiveReaddir(fromFileUrl(new URL("../static/images", import.meta.url)))
+const imgFiles = await recursiveReaddir(fromFileUrl(new URL("../static/images/header-bg", import.meta.url)))
 let imgSrcs: string[] = []
 imgFiles.forEach(fileName => {
   IMG_RESOLUTIONS.forEach((_, key) => {
@@ -37,13 +37,13 @@ imgFiles.forEach(fileName => {
 })
 imgSrcs = imgSrcs.filter(src => src.includes(".png"))
 
-const componentFiles = await recursiveReaddir(fromFileUrl(new URL("../components", import.meta.url)))
-const componentSrcs = componentFiles.map(fileName => `http://${server.hostname}:${server.port}${fileName.split(Deno.cwd())[1]}`)
+// const componentFiles = await recursiveReaddir(fromFileUrl(new URL("../components", import.meta.url)))
+// const componentSrcs = componentFiles.map(fileName => `http://${server.hostname}:${server.port}${fileName.split(Deno.cwd())[1]}`)
 
 // make requests to file dummy cache
 await Promise.all([
   ...imgSrcs,
-  ...componentSrcs
+  // ...componentSrcs
 ].map(url => server.requestHandler(new Request(url))))
 
 // serialize dummy cache items with store

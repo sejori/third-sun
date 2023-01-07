@@ -36,7 +36,6 @@ loadPrecache(cache).then(() => {
       "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
     })
   }))
-  router.addRoute("/load-event", () => Response.redirect("/", 302))
 
   loadTarget.dispatchEvent(new CustomEvent("send", { detail: "loaded" }))
 })

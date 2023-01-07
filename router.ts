@@ -18,7 +18,7 @@ const indexUrl = new URL("./index.html", import.meta.url)
 
 // loading page -> index page
 const loadTarget = new EventTarget()
-router.addRoute("/", prod ? Peko.cacher(cache) : [], Peko.staticHandler(loadingUrl, {
+router.addRoute("/", Peko.staticHandler(loadingUrl, {
   headers: new Headers({
     "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
   })
@@ -31,7 +31,7 @@ loadPrecache(cache).then(() => {
   router.removeRoute("/")
   router.removeRoute("/load-event")
 
-  router.addRoute("/", prod ? Peko.cacher(cache) : [], Peko.staticHandler(indexUrl, {
+  router.addRoute("/", Peko.staticHandler(indexUrl, {
     headers: new Headers({
       "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
     })

@@ -7,10 +7,10 @@ export const readPrecache = async () => {
       const key = dirEntry.name.split(".txt")[0]
       const value = await Deno.readTextFile(new URL(`${dirUrl.href}/${dirEntry.name}`))
 
-      items.push({ key, value })
+      if (value) items.push({ key, value })
     }
   } catch(e) {
-    "Read /precache failed. If in CI this is expected :)"
+    "Read precache failed. If in CI this is expected :)"
     console.log(e)
   }
 

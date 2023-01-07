@@ -5,8 +5,8 @@ const decoder = new TextDecoder()
 
 export const emitTS = (fileUrl: URL) => staticHandler(fileUrl, {
   transform: async (content) => {
-    console.log("Emitting: " + fileUrl.href.slice(Deno.cwd().length+1))
-    
+    console.log("Emitting: " + fileUrl.href)
+
     const result = await emit(fileUrl, {
       load(specifier: string) {
         return Promise.resolve({ kind: 'module', specifier, content: decoder.decode(content) })

@@ -7,7 +7,6 @@ export const loadPrecache = async (cache: ResponseCache) => {
   let rootId = ""
 
   const items = await readPrecache()
-  if (!items[0]) return
 
   items.forEach(({ key, value }) => {
     if (key === "root") {
@@ -16,6 +15,8 @@ export const loadPrecache = async (cache: ResponseCache) => {
       initCacheMap.set(key, value)
     }
   })
+
+  if (!rootId) return
 
   const store = new Store(initCacheMap)
   const storeItems = await store.load(rootId)

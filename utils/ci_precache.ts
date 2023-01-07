@@ -39,7 +39,6 @@ imgSrcs = imgSrcs.filter(src => src.includes(".png"))
 
 const componentFiles = await recursiveReaddir(fromFileUrl(new URL("../components", import.meta.url)))
 const componentSrcs = componentFiles.map(fileName => `http://${server.hostname}:${server.port}${fileName.split(Deno.cwd())[1]}`)
-console.log(componentSrcs)
 
 // make requests to file dummy cache
 await Promise.all([

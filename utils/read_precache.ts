@@ -10,6 +10,7 @@ export const readPrecache = async () => {
       items.push({ key, value })
     }
   } catch(e) {
+    "Read /precache failed. If in CI this is expected :)"
     console.log(e)
   }
 

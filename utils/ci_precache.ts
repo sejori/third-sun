@@ -22,10 +22,10 @@ const store = new Store({
 // reset precache folder
 try {
   await Deno.remove(new URL("../precache", import.meta.url), { recursive: true })
-} catch(e) { console.log(e) }
+} catch(_) { null }
 try {
   await Deno.mkdir(new URL("../precache", import.meta.url))
-} catch(e) { console.log(e) }
+} catch(_) { null }
 
 // generate request addresses for images and components
 const imgFiles = await recursiveReaddir(fromFileUrl(new URL("../static/images/header-bg", import.meta.url)))
@@ -39,6 +39,7 @@ imgSrcs = imgSrcs.filter(src => src.includes(".png"))
 
 const componentFiles = await recursiveReaddir(fromFileUrl(new URL("../components", import.meta.url)))
 const componentSrcs = componentFiles.map(fileName => `http://${server.hostname}:${server.port}${fileName.split(Deno.cwd())[1]}`)
+console.log(componentSrcs)
 
 // make requests to file dummy cache
 await Promise.all([

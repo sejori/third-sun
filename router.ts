@@ -8,7 +8,7 @@ import { resizableImage } from "./handlers/resize-image.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
 const router = new Peko.Router()
-const prod = Deno.env.get("DENO_DEPLOYMENT_ID")
+const prod = !!Deno.env.get("DENO_DEPLOYMENT_ID")
 console.log("PROD:" + prod)
 
 const cache = new Peko.ResponseCache()

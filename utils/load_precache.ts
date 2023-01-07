@@ -1,20 +1,12 @@
 import { ResponseCache } from "peko"
 import { Store } from "super_cereal"
+import { readPrecache } from "./read_precache.ts"
 
 export const loadPrecache = async (cache: ResponseCache) => {
   const initCacheMap: Map<string, string> = new Map()
   let rootId = ""
 
-  const items: { key: string, value: string }[] = []
-  const worker = new Worker(new URL("./read_precache_worker.ts", import.meta.url), { type: "module" })
-  await new Promise(res => {
-    worker.postMessage({ dir: new URL("../precache", import.meta.url).href })
-    worker.addEventListener("message", (e) => {
-      if (e.data === "complete") return res(true)
-      items.push(JSON.parse(e.data))
-    })
-  })
-
+  const items = await readPrecache()
   if (!items[0]) return
 
   items.forEach(({ key, value }) => {

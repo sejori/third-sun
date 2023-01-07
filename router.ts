@@ -26,6 +26,8 @@ router.addRoute("/", Peko.staticHandler(loadingUrl, {
 
 router.addRoute("/load-event", Peko.sseHandler(loadTarget))
 loadPrecache(cache).then(() => {
+  console.log("loaded precache")
+  
   router.removeRoute("/")
   router.removeRoute("/load-event")
 

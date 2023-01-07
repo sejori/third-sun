@@ -28,7 +28,8 @@ try {
 } catch(_) { null }
 
 // generate request addresses for images and components
-const imgFiles = await recursiveReaddir(fromFileUrl(new URL("../static/images/header-bg", import.meta.url)))
+let imgFiles = await recursiveReaddir(fromFileUrl(new URL("../static/images/header-bg", import.meta.url)))
+imgFiles = imgFiles.filter(filename => filename.includes("-min"))
 let imgSrcs: string[] = []
 imgFiles.forEach(fileName => {
   IMG_RESOLUTIONS.forEach((_, key) => {

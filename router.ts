@@ -18,7 +18,7 @@ const indexUrl = new URL("./index.html", import.meta.url)
 
 // loading page -> index page
 const loadTarget = new EventTarget()
-router.addRoute("/", Peko.staticHandler(loadingUrl, {
+router.addRoute("/", prod ? Peko.cacher(cache) : [], Peko.staticHandler(loadingUrl, {
   headers: new Headers({
     "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
   })
@@ -31,7 +31,7 @@ loadPrecache(cache).then(() => {
   router.removeRoute("/")
   router.removeRoute("/load-event")
 
-  router.addRoute("/", Peko.staticHandler(indexUrl, {
+  router.addRoute("/", prod ? Peko.cacher(cache) : [], Peko.staticHandler(indexUrl, {
     headers: new Headers({
       "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
     })
@@ -46,7 +46,7 @@ router.addRoutes(components.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
-    middleware: prod ? Peko.cacher(cache) : [],
+    middleware: Peko.cacher(cache),
     handler: emitTS(new URL(`./${fileRoute}`, import.meta.url))
   }
 }))
@@ -66,7 +66,7 @@ router.addRoutes(scripts.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
-    middleware: prod ? Peko.cacher(cache) : [],
+    middleware: Peko.cacher(cache),
     handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), {
       headers: new Headers({ "Cache-Control": "max-age=600, stale-while-revalidate=86400" })
     })
@@ -89,7 +89,7 @@ router.addRoutes(style.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
-    middleware: prod ? Peko.cacher(cache) : [],
+    middleware: Peko.cacher(cache),
     handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), {
       headers: new Headers({ "Cache-Control": "max-age=600, stale-while-revalidate=86400" })
     })

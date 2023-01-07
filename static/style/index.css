@@ -21,11 +21,29 @@ img { max-width: 100%; }
 h1 { font-size: 84px; }
 h2 { font-size: 72px; }
 h3 { font-size: 48px; }
-h4 { font-size: 32px; }
+h4 { font-size: 32px; margin: 0; }
 p { font-size: 24px; }
 a {
-  font-size: 24px;
   color: #eb901a;
+}
+.cta {
+  margin: 20px;
+  padding: 20px;
+  color: whitesmoke;
+  background-color: #eb901a;
+  align-self: center;
+}
+.shadowed {
+  position: relative;
+}
+.shadowed::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 section { padding: 80px 30px; position: relative; }
@@ -33,7 +51,6 @@ section.fade { background: linear-gradient(#09132e, black); }
 section img { max-width: 90%; }
 section h1 { color: #8bc8fb; }
 section p { color: whitesmoke; }
-
 
 footer {
   background-color: whitesmoke;
@@ -49,6 +66,7 @@ footer {
   display: flex;
   flex-direction: column;
 }
+
 .wide {
   max-width: 1200px;
 }
@@ -56,6 +74,14 @@ footer {
 .center {
   align-items: center;
   justify-content: center;
+}
+
+.align-start {
+  align-self: flex-start;
+}
+
+.align-end {
+  align-self: flex-end;
 }
 
 .spacer-lg {

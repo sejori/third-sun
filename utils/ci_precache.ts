@@ -28,15 +28,18 @@ try {
 } catch(_) { null }
 
 // generate request addresses for images and components
-let imgFiles = await recursiveReaddir(fromFileUrl(new URL("../static/images/header-bg", import.meta.url)))
-imgFiles = imgFiles.filter(filename => filename.includes("-min"))
-let imgSrcs: string[] = []
-imgFiles.forEach(fileName => {
+const imgFiles = [
+  ...(await recursiveReaddir(fromFileUrl(new URL("../static/images/header-bg", import.meta.url)))).filter(filename => filename.includes("-min")),
+  ...await recursiveReaddir(fromFileUrl(new URL("../static/images/showcase", import.meta.url)))
+]
+const imgSrcs: string[] = []
+imgFiles.forEach(filename => {
   IMG_RESOLUTIONS.forEach((_, key) => {
-    imgSrcs.push(`http://${server.hostname}:${server.port}${fileName.split(Deno.cwd())[1]}?res=${key}`)
+    if (key !== "low" && filename.includes("showcase") || (!filename.includes(".png") && !filename.includes(".jpeg"))) return
+    imgSrcs.push(`http://${server.hostname}:${server.port}${filename.split(Deno.cwd())[1]}?res=${key}`)
   })
 })
-imgSrcs = imgSrcs.filter(src => src.includes(".png"))
+// imgSrcs = imgSrcs.filter(src => src.includes(".png"))
 
 const componentFiles = await recursiveReaddir(fromFileUrl(new URL("../components", import.meta.url)))
 const componentSrcs = componentFiles.map(fileName => `http://${server.hostname}:${server.port}${fileName.split(Deno.cwd())[1]}`)

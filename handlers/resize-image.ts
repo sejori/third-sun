@@ -13,7 +13,7 @@ export const resizableImage =  (fileRoute: string) => async (ctx: RequestContext
     const params = new URL(ctx.request.url).searchParams
     const res  = IMG_RESOLUTIONS.get(params.get("res"))
 
-    if (!res) return contents
+    if (!res || res === "full") return contents
 
     console.log("Resizing " + fileRoute + " to res: " + res)
     return resize_image(contents, res, res)

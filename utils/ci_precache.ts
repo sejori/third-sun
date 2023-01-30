@@ -30,6 +30,7 @@ try {
 // generate request addresses for images and components
 const imgFiles = [
   ...(await recursiveReaddir(fromFileUrl(new URL("../static/images/header-bg", import.meta.url)))).filter(filename => filename.includes("-min")),
+  ...await recursiveReaddir(fromFileUrl(new URL("../static/images/tees", import.meta.url))),
   ...await recursiveReaddir(fromFileUrl(new URL("../static/images/showcase", import.meta.url)))
 ]
 const imgSrcs: string[] = []

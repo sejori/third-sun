@@ -79,6 +79,10 @@ footer {
   align-self: flex-start;
 }
 
+.align-center {
+  align-self: center;
+}
+
 .align-end {
   align-self: flex-end;
 }

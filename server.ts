@@ -13,7 +13,7 @@ server.use(async (_, next) => {
  }
 })
 
-// not using addRoutes as modifying routes from router.ts
+// not using addRoutes as modifying routes in router.ts
 server.routes = router.routes
 
 server.listen(3000) //  say hello Rabbit boi .b,b!

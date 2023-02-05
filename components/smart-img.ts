@@ -11,7 +11,7 @@ class SmartImg extends HTMLImageElement {
     this.triggerEvent = this.dataset["triggerevent"]
 
     if (this.triggerEvent) {
-      globalThis.document.addEventListener(this.triggerEvent, this.swapSrc)
+      globalThis.document.addEventListener(this.triggerEvent, () => this.swapSrc())
     } else this.swapSrc();
 
     console.log("constructed smart-img");
@@ -22,7 +22,7 @@ class SmartImg extends HTMLImageElement {
   // }
 
   async swapSrc() {
-    let targetRes = ""
+    let targetRes = [...IMG_RESOLUTIONS.keys()][0]
 
     // limit res to parent/screen size (doubled for high density displays)
     const [width, height] = this.parentElement 

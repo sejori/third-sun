@@ -1,6 +1,6 @@
-import { Server } from "peko"
+import { Server, ResponseCache, cacher } from "peko"
 import { Store } from "super_cereal"
-import router, { cache } from "../router.ts"
+import router from "../router.ts"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
 
@@ -10,6 +10,8 @@ const encoder = new TextEncoder()
 
 // dummy server for generating cache
 const server = new Server()
+const cache = new ResponseCache()
+server.use(cacher(cache))
 server.addRoutes(router.routes)
 
 // set up super_cereal store
@@ -40,7 +42,6 @@ imgFiles.forEach(filename => {
     imgSrcs.push(`http://${server.hostname}:${server.port}${filename.split(Deno.cwd())[1]}?res=${key}`)
   })
 })
-// imgSrcs = imgSrcs.filter(src => src.includes(".png"))
 
 const componentFiles = await recursiveReaddir(fromFileUrl(new URL("../components", import.meta.url)))
 const componentSrcs = componentFiles.map(fileName => `http://${server.hostname}:${server.port}${fileName.split(Deno.cwd())[1]}`)

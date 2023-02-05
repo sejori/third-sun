@@ -22,13 +22,13 @@ h1 { font-size: 84px; }
 h2 { font-size: 72px; }
 h3 { font-size: 48px; }
 h4 { font-size: 32px; margin: 0; }
-p { font-size: 24px; }
+p { font-family: system-ui, 'Helvetica Neue', sans-serif; font-size: 1.2rem; }
 a {
   color: #eb901a;
 }
 .cta {
-  margin: 10px;
-  padding: 20px;
+  margin: 12px;
+  padding: 12px;
   color: whitesmoke;
   background-color: #eb901a;
   align-self: center;

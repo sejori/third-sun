@@ -47,9 +47,8 @@ a {
 }
 
 section { padding: 80px 30px; position: relative; }
-section.blue-bg { background-color: #09132e; }
 section.fade { background: linear-gradient(#09132e, black); }
-section h1 { color: #09132e; }
+section h1 { color: #fdffff; }
 section p { color: whitesmoke; }
 
 footer {

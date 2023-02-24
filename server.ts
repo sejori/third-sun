@@ -1,5 +1,5 @@
 import * as Peko from "peko"
-import router from "./router.ts"
+import { router } from "./router.ts"
 
 const server = new Peko.Server()
 export const cache = new Peko.ResponseCache()

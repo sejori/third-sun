@@ -8,7 +8,7 @@ import { preloader } from "./middleware/preload.ts"
 // import { markdown } from "./handlers/markdown.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
-const router = new Peko.Router()
+export const router = new Peko.Router()
 
 const prod = !!Deno.env.get("DENO_DEPLOYMENT_ID")
 const headers = new Headers({
@@ -80,5 +80,3 @@ router.addRoutes(style.map((file): Peko.Route => {
     handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), { headers })
   }
 }))
-
-export default router

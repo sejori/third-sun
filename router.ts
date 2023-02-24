@@ -9,11 +9,11 @@ import { preloader } from "./middleware/preload.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
 const router = new Peko.Router()
+
 const prod = !!Deno.env.get("DENO_DEPLOYMENT_ID")
 const headers = new Headers({
   "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
 })
-
 console.log("PROD:" + prod)
 
 // PAGES
@@ -29,7 +29,7 @@ const components = await recursiveReaddir(fromFileUrl(new URL("./components", im
 router.addRoutes(components.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
-    route: `/${fileRoute}`,
+    path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: emitTS(new URL(`./${fileRoute}`, import.meta.url))
   }
@@ -41,7 +41,7 @@ const images = await recursiveReaddir(fromFileUrl(new URL("./public/images", imp
 router.addRoutes(images.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
-    route: `/${fileRoute}`,
+    path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: resizableImage(fileRoute)
   }
@@ -53,7 +53,7 @@ const scripts = await recursiveReaddir(fromFileUrl(new URL("./public/scripts", i
 router.addRoutes(scripts.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
-    route: `/${fileRoute}`,
+    path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), { headers })
   }
@@ -75,7 +75,7 @@ const style = await recursiveReaddir(fromFileUrl(new URL("./public/style", impor
 router.addRoutes(style.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
-    route: `/${fileRoute}`,
+    path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
     handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), { headers })
   }

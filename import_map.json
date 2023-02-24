@@ -1,6 +1,6 @@
 {
   "imports": {
-    "peko": "https://deno.land/x/peko@1.4.1/mod.ts",
+    "peko": "https://deno.land/x/peko@1.7.1/mod.ts",
     "recursiveReadDir": "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts",
     "path": "https://deno.land/std@0.150.0/path/mod.ts",
     "emit": "https://deno.land/x/emit@0.12.0/mod.ts",

@@ -11,7 +11,11 @@ let loaded = false
 export const preloader: Middleware = (ctx, next) => {
   if (loaded) return next()
 
-  ctx.server.addRoute("/load-event", sseHandler(loadTarget))
+  try {
+    ctx.server.addRoute("/load-event", sseHandler(loadTarget))
+  } catch (e) {
+    console.log(e)
+  }
 
   loadPrecache(cache).then(() => {
     console.log("preloaded")

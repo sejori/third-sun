@@ -47,10 +47,6 @@ class NavMenu extends HTMLElement {
 
   moveToBody() {
     globalThis.document.body.insertBefore(this, globalThis.document.body.firstChild)
-    // completing hijacking these to implement a background hack. soz
-    // will be triggered by event now
-    globalThis.document.body.style.backgroundColor = "black"
-
     globalThis.document.dispatchEvent(new CustomEvent("nav-menu_move-to-body"))
   }
 

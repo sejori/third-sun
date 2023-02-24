@@ -1,5 +1,5 @@
 import { Middleware, sseHandler, staticHandler } from "peko"
-import { cache } from "../server.ts"
+import { cache } from "../cache.ts"
 import { loadPrecache } from "../utils/load_precache.ts"
 
 const loadingUrl = new URL("../public/pages/loading.html", import.meta.url)

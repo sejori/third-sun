@@ -1,45 +1,30 @@
 import * as Peko from "peko"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
-import { loadPrecache } from "./utils/load_precache.ts"
+import { cache } from "./server.ts"
 import { emitTS } from "./handlers/emit-ts.ts"
 import { resizableImage } from "./handlers/resize-image.ts"
+import { preloader } from "./middleware/preload.ts"
 // import { markdown } from "./handlers/markdown.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
 const router = new Peko.Router()
 const prod = !!Deno.env.get("DENO_DEPLOYMENT_ID")
-console.log("PROD:" + prod)
-
-const cache = new Peko.ResponseCache()
-
-const loadingUrl = new URL("./loading.html", import.meta.url)
-const indexUrl = new URL("./index.html", import.meta.url)
-
-// loading page -> index page
-const loadTarget = new EventTarget()
-router.addRoute("/", Peko.staticHandler(loadingUrl, {
-  headers: new Headers({
-    "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
-  })
-}))
-
-router.addRoute("/load-event", Peko.sseHandler(loadTarget))
-loadPrecache(cache).then(() => {
-  console.log("loaded precache")
-
-  router.removeRoute("/")
-  router.removeRoute("/load-event")
-
-  router.addRoute("/", Peko.staticHandler(indexUrl, {
-    headers: new Headers({
-      "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
-    })
-  }))
-
-  loadTarget.dispatchEvent(new CustomEvent("send", { detail: "loaded" }))
+const headers = new Headers({
+  "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
 })
 
+console.log("PROD:" + prod)
+
+// PAGES
+const indexUrl = new URL("./public/pages/index.html", import.meta.url)
+const tradeUrl = new URL("./public/pages/trade.html", import.meta.url)
+const archiveUrl = new URL("./public/pages/archive.html", import.meta.url)
+router.addRoute("/", preloader, Peko.staticHandler(indexUrl, { headers }))
+router.addRoute("/trade", preloader, Peko.staticHandler(tradeUrl, { headers }))
+router.addRoute("/archive", preloader, Peko.staticHandler(archiveUrl, { headers }))
+
+// COMPONENTS
 const components = await recursiveReaddir(fromFileUrl(new URL("./components", import.meta.url)))
 router.addRoutes(components.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
@@ -50,7 +35,9 @@ router.addRoutes(components.map((file): Peko.Route => {
   }
 }))
 
-const images = await recursiveReaddir(fromFileUrl(new URL("./static/images", import.meta.url)))
+
+// IMAGES
+const images = await recursiveReaddir(fromFileUrl(new URL("./public/images", import.meta.url)))
 router.addRoutes(images.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
@@ -60,19 +47,19 @@ router.addRoutes(images.map((file): Peko.Route => {
   }
 }))
 
-const scripts = await recursiveReaddir(fromFileUrl(new URL("./static/scripts", import.meta.url)))
+
+// SCRIPTS
+const scripts = await recursiveReaddir(fromFileUrl(new URL("./public/scripts", import.meta.url)))
 router.addRoutes(scripts.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
-    handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), {
-      headers: new Headers({ "Cache-Control": "max-age=600, stale-while-revalidate=86400" })
-    })
+    handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), { headers })
   }
 }))
 
-// const stories = await recursiveReaddir(fromFileUrl(new URL("./static/stories", import.meta.url)))
+// const stories = await recursiveReaddir(fromFileUrl(new URL("./public/stories", import.meta.url)))
 // const storyRoutes = await Promise.all(stories.filter(story => story.includes(".md")).map(async (file): Promise<Peko.Route> => {
 //   const fileRoute = file.slice(Deno.cwd().length+1)
 //   const content = await Deno.readTextFile(new URL(`./${fileRoute}`, import.meta.url))
@@ -83,15 +70,14 @@ router.addRoutes(scripts.map((file): Peko.Route => {
 //   }
 // }))
 
-const style = await recursiveReaddir(fromFileUrl(new URL("./static/style", import.meta.url)))
+// STYLE
+const style = await recursiveReaddir(fromFileUrl(new URL("./public/style", import.meta.url)))
 router.addRoutes(style.map((file): Peko.Route => {
   const fileRoute = file.slice(Deno.cwd().length+1)
   return {
     route: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
-    handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), {
-      headers: new Headers({ "Cache-Control": "max-age=600, stale-while-revalidate=86400" })
-    })
+    handler: Peko.staticHandler(new URL(`./${fileRoute}`, import.meta.url), { headers })
   }
 }))
 

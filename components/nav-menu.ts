@@ -31,7 +31,12 @@ class NavMenu extends HTMLElement {
       threshold: [0]
     });
     
-    observer.observe(globalThis.document.body.querySelector("header")!)
+    const header = globalThis.document.body.querySelector("header")
+    if (header) {
+      observer.observe(header)
+    } else {
+      this.moveToBody()
+    }
 
     console.log("constructed nav-menu")
   }

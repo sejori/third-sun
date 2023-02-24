@@ -1,6 +1,6 @@
 @font-face {
   font-family: iiisun;
-  src: url("/static/style/iiisunFont-Regular.otf");
+  src: url("/public/style/iiisunFont-Regular.otf");
 }
 
 html, body {

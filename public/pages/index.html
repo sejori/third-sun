@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Third Sun</title>
+  <link rel="icon" type="image/png" href="/public/images/Logo-square.png" />
+  <!-- <link rel="preload" href="static/style/iiisunFont-Regular.otf" as="font" type="font/otf"> -->
+
+  <link rel="stylesheet" href="/public/style/index.css">
+  <link rel="stylesheet" href="/public/style/nav.css">
+  <link rel="stylesheet" href="/public/style/parallax.css">
+
+  <!-- polyfill for safari - https://stackoverflow.com/questions/67466609/customizable-built-in-elements-on-safari-polyfill-via-script-tag-vs-es6-import -->
+  <script src="/public/scripts/custom-elements-shim.js"></script>
+  <script type="module" src="/components/smart-img.ts" async></script>
+  <script type="module" src="/components/nav-menu.ts" async></script>
+</head>
+
+<body>
+  <div class="parallax">
+    <header class="parallax__group">
+      <img is="smart-img" class="parallax__layer deep" src="/public/images/header-bg/BLUE_LOGO-min.png?res=low" fetchpriority="high">
+      <img is="smart-img" class="parallax__layer background" src="/public/images/header-bg/BLUE_BACKGROUND-min.png?res=low" fetchpriority="high">
+      <img is="smart-img" class="parallax__layer midground" src="/public/images/header-bg/BLUE_MIDGROUND-min.png?res=low" fetchpriority="high">
+      <img is="smart-img" class="parallax__layer foreground" src="/public/images/header-bg/BLUE_FOREGROUND-min.png?res=low" fetchpriority="high">
+    </header>
+
+    <section id="info" class="fade parallax__group">
+      <nav is="nav-menu">
+        <button id="nav-button" name="nav-button">+</button>
+    
+        <div id="nav-content">
+          <h1>Offerings</h1>
+          <ul>
+            <li>
+              <a href="/trade">Trade</a>
+            </li>
+            <li>
+              <a href="/stories">Stories</a>
+            </li>
+            <li>
+              <a href="/archive">The depths</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Third Sun</h1>
+        <p>A talent of legend from the depths below. A creator of things, graveyard so.</p>
+        <p>Quencher of desires, noble and sadistic. Acquirer of knowledge, however non-altruistic.</p>
+        <p>Sample the wares by continuing to scroll...</p>
+        <p>When inspiration strikes, you know who to call...</p>
+        <p></p>
+      </div>
+    </section>
+
+    <section class="parallax__group">
+      <div class="container wide foreground">
+        <div class="spacer-md">&nbsp;</div>
+      </div>
+    </section>
+
+    <footer class="parallax__group">
+      <div class="container" style="justify-content: space-between;">
+        <div>
+          <h2>Do you want a demonic website?</h2>
+          <h3><a href="">Summon satanic forces</a></h3>
+        </div>
+  
+        <p>
+          Made with ❤️‍🔥 by <a href="https://thesebsite.com">seb</a> & <a href="https://iiisun.art">iiisun</a>.
+        </p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

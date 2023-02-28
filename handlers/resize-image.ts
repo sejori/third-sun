@@ -2,7 +2,7 @@ import {
   RequestContext,
   staticHandler
 } from "peko"
-import { instantiate } from "../lib/tjw_rust.generated.js"
+import { instantiate } from "../rust/lib/tjw_images.generated.js"
 
 import { IMG_RESOLUTIONS } from "../components/config.ts"
 

@@ -1,4 +1,4 @@
 [workspace]
 members = [
-  "tjw_rust",
+  "tjw-images",
 ]

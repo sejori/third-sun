@@ -1,7 +1,7 @@
 // @generated file from wasmbuild -- do not edit
 // deno-lint-ignore-file
 // deno-fmt-ignore-file
-// source-hash: b8100c9c1dd6ec18917ed2a95dcb7e20211b3c8f
+// source-hash: b819309fc7832dacea2914744b73ca7e012e7eee
 let wasm;
 
 const cachedTextDecoder = new TextDecoder("utf-8", { ignoreBOM: true, fatal: true });
@@ -146,7 +146,7 @@ export function isInstantiated() {
  * @param {InstantiateOptions} opts
  */
 async function instantiateModule(opts) {
-	const wasmUrl = opts.url ?? new URL("tjw_rust_bg.wasm", import.meta.url);
+	const wasmUrl = opts.url ?? new URL("tjw_images_bg.wasm", import.meta.url);
 	const decompress = opts.decompress;
 	switch (wasmUrl.protocol) {
 		case "file:":

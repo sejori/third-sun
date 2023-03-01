@@ -16,6 +16,10 @@
   <script src="/public/scripts/custom-elements-shim.js"></script>
   <script type="module" src="/components/smart-img.ts" async></script>
   <script type="module" src="/components/nav-menu.ts" async></script>
+  <script>
+    const source = new EventSource("/devSocket")  
+    source.addEventListener("message", (e) => console.log(e))
+  </script>
 </head>
 
 <body>

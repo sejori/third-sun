@@ -11,6 +11,7 @@ import { preloader } from "./middleware/preloader.ts"
 export const router = new Peko.Router()
 
 const prod = !!Deno.env.get("DENO_DEPLOYMENT_ID")
+/* for dev -> */ // const prod = true
 const headers = new Headers({
   "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
 })

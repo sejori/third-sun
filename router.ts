@@ -20,9 +20,9 @@ console.log("PROD:" + prod)
 const indexUrl = new URL("./public/pages/index.html", import.meta.url)
 const tradeUrl = new URL("./public/pages/trade.html", import.meta.url)
 const archiveUrl = new URL("./public/pages/archive.html", import.meta.url)
-router.addRoute("/", preloader, Peko.staticHandler(indexUrl, { headers }))
-router.addRoute("/trade", preloader, Peko.staticHandler(tradeUrl, { headers }))
-router.addRoute("/archive", preloader, Peko.staticHandler(archiveUrl, { headers }))
+router.addRoute("/", preloader(indexUrl), Peko.staticHandler(indexUrl, { headers }))
+router.addRoute("/trade", preloader(tradeUrl), Peko.staticHandler(tradeUrl, { headers }))
+router.addRoute("/archive", preloader(archiveUrl), Peko.staticHandler(archiveUrl, { headers }))
 
 // COMPONENTS
 const components = await recursiveReaddir(fromFileUrl(new URL("./components", import.meta.url)))

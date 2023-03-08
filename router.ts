@@ -4,7 +4,7 @@ import { fromFileUrl } from "path"
 import { cache } from "./cache.ts"
 import { emitTS } from "./handlers/emit-ts.ts"
 import { resizableImage } from "./handlers/resize-image.ts"
-import { preloader } from "./middleware/preload.ts"
+import { preloader } from "./middleware/preloader.ts"
 // import { markdown } from "./handlers/markdown.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 

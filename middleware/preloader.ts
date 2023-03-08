@@ -20,9 +20,9 @@ export const preloader = (pageUrl: URL): Middleware => {
       ...await getSrcs(pageUrl, "img"),
       ...await getSrcs(pageUrl, "script")
     ]
-    console.log(srcs)
 
     Promise.all(srcs.map(async src => {
+      await new Promise(res => setTimeout(res, 100))
       await ctx.server.requestHandler(new Request(new URL(`http://${ctx.server.hostname}:${ctx.server.port}${src}`)))
     })).then(() => {
       console.log("preloaded")

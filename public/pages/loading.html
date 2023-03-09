@@ -27,7 +27,11 @@
       "Distilling dye...",
       "Crafting medium...",
       "Exploring darkness...",
-      "Casting utensil..."
+      "Casting utensil...",
+      "Scripting commandments...",
+      "Weaving spells...",
+      "Enscribing runes...",
+      "Polishing compendeum..."
     ]
     document.querySelector("#loading-text").textContent = loadTexts[Math.ceil(Math.random()*loadTexts.length-1)];
     const sse = new EventSource("/load-event")

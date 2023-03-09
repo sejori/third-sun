@@ -14,10 +14,22 @@
 <body>
   <div class="container center">
     <img src="/public/images/loading.gif" alt="Loading..." width="400">
-    <h4>Performing startup ritual...</h4>
+    <h4 id="loading-text"></h4>
   </div>
 
   <script>
+    const loadTexts = [
+      "Performing ritual...",
+      "Framing masterwork...",
+      "Sharpening axe...",
+      "Enticing legend...",
+      "Forming framework...",
+      "Distilling dye...",
+      "Crafting medium...",
+      "Exploring darkness...",
+      "Casting utensil..."
+    ]
+    document.querySelector("#loading-text").textContent = loadTexts[Math.ceil(Math.random()*loadTexts.length-1)];
     const sse = new EventSource("/load-event")
     sse.onmessage = (e) => {
       console.log('reload received')

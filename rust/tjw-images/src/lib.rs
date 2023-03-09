@@ -31,7 +31,7 @@ pub fn resize_image(mut data: Vec<u8>, width: u32, height: u32) -> Vec<u8> {
   // log_u32(height);
 
   // resize DynamicImage
-  let resized = full.resize(width, height, FilterType::Triangle);
+  let resized = full.resize(width, height, FilterType::Lanczos3);
 
   // write to data
   resized.write_to(&mut io::Cursor::new(&mut data), format).expect("REASON");

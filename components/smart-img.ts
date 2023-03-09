@@ -17,9 +17,13 @@ class SmartImg extends HTMLImageElement {
     console.log("constructed smart-img");
   }
 
-  // connectedCallback() {
-  //   console.log(this, 'connected!')
-  // }
+  connectedCallback() {
+    console.log('here')
+    this.addEventListener("click", () => {
+      console.log("clicked")
+      window.location.href = this.baseSrc
+    });
+  }
 
   async swapSrc() {
     let targetRes = [...IMG_RESOLUTIONS.keys()][0]

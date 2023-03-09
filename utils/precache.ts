@@ -20,9 +20,6 @@ export const loadPagePrecache = async (pageUrl: URL, cache: ResponseCache, cb: (
 
   if (!rootId) return cb(false)
 
-  // delay bc this is actually too quick sometimes
-  // await new Promise(res => setTimeout(res, 100))
-
   const store = new Store(initCacheMap)
   const storeItems = await store.load(rootId)
   

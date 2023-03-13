@@ -27,7 +27,7 @@ export const preloader = (pageUrl: URL): Middleware => {
         await new Promise(res => setTimeout(res, 100))
 
         // do all res query params for images
-        const initImgSrcs = await getSrcs(pageUrl, `img(.)*is="smart-img"(.)*`)
+        const initImgSrcs = await getSrcs(pageUrl, `img(.)*is="img-resizing"(.)*`)
         const imgSrcs = initImgSrcs.map(src => {
           const base = src.split("?")[0]
           return [...IMG_RESOLUTIONS.keys()].filter(val => val !== "high").map(key => `${base}?res=${key}`)

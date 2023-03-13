@@ -14,8 +14,8 @@
 
   <!-- polyfill for safari - https://stackoverflow.com/questions/67466609/customizable-built-in-elements-on-safari-polyfill-via-script-tag-vs-es6-import -->
   <script src="/public/scripts/custom-elements-shim.js"></script>
-  <script type="module" src="/components/smart-img.ts" async></script>
-  <script type="module" src="/components/nav-menu.ts" async></script>
+  <script type="module" src="/components/custom-elements/img-resizing.ts" async></script>
+  <script type="module" src="/components/custom-elements/nav-menu.ts" async></script>
   <script>
     const source = new EventSource("/devSocket")  
     source.addEventListener("message", (e) => console.log(e))
@@ -25,10 +25,10 @@
 <body>
   <div class="parallax">
     <header class="parallax__group">
-      <img is="smart-img" class="parallax__layer deep" src="/public/images/header-bg/BLUE_LOGO-min.png?res=low" fetchpriority="high">
-      <img is="smart-img" class="parallax__layer background" src="/public/images/header-bg/BLUE_BACKGROUND-min.png?res=low" fetchpriority="high">
-      <img is="smart-img" class="parallax__layer midground" src="/public/images/header-bg/BLUE_MIDGROUND-min.png?res=low" fetchpriority="high">
-      <img is="smart-img" class="parallax__layer foreground" src="/public/images/header-bg/BLUE_FOREGROUND-min.png?res=low" fetchpriority="high">
+      <img is="img-resizing" class="parallax__layer deep" src="/public/images/header-bg/BLUE_LOGO-min.png?res=low" fetchpriority="high">
+      <img is="img-resizing" class="parallax__layer background" src="/public/images/header-bg/BLUE_BACKGROUND-min.png?res=low" fetchpriority="high">
+      <img is="img-resizing" class="parallax__layer midground" src="/public/images/header-bg/BLUE_MIDGROUND-min.png?res=low" fetchpriority="high">
+      <img is="img-resizing" class="parallax__layer foreground" src="/public/images/header-bg/BLUE_FOREGROUND-min.png?res=low" fetchpriority="high">
     </header>
 
     <section id="info" class="blue-bg parallax__group">
@@ -66,7 +66,7 @@
     <section class="parallax__group">
       <div class="container wide foreground">
         <div class="align-center">
-          <img is="smart-img" style="width: 500px;" alt="Beastfrombelow" src="/public/images/showcase/Beastfrombelow.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
+          <img is="img-resizing" style="width: 500px;" alt="Beastfrombelow" src="/public/images/showcase/Beastfrombelow.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
           <h4>Beast from below <a href="/public/images/showcase/Beastfrombelow.png">view full</a></h4>
         </div>
       </div>
@@ -74,12 +74,12 @@
 
     <section class="parallax__group">
       <!-- <div class="container wide foreground">
-        <img is="smart-img" style="width: 420px; align-self: center;" alt="Sectapustshirt" src="/public/images/tees/Sectapustshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body">
+        <img is="img-resizing" style="width: 420px; align-self: center;" alt="Sectapustshirt" src="/public/images/tees/Sectapustshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body">
         <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
       </div> -->
       <div class="container wide foreground">
         <div class="align-center">
-          <img is="smart-img" style="width: 500px; align-self: flex-end;" alt="Runawaycoward" src="/public/images/showcase/Runawaycoward.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
+          <img is="img-resizing" style="width: 500px; align-self: flex-end;" alt="Runawaycoward" src="/public/images/showcase/Runawaycoward.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
           <h4>Runaway coward <a href="/public/images/showcase/Runawaycoward.png">view full</a></h4>
         </div>
       </div>
@@ -87,12 +87,12 @@
 
     <section class="parallax__group">
       <!-- <div class="container wide foreground">
-        <img is="smart-img" style="width: 420px; align-self: center;" alt="SnakeBoneTshirt" src="/public/images/tees/SnakeBoneTshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body">
+        <img is="img-resizing" style="width: 420px; align-self: center;" alt="SnakeBoneTshirt" src="/public/images/tees/SnakeBoneTshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body">
         <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
       </div> -->
       <div class="container wide foreground">
         <div class="align-center">
-          <img is="smart-img" style="width: 500px;" alt="SeaGoddess" src="/public/images/showcase/SeaGoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
+          <img is="img-resizing" style="width: 500px;" alt="SeaGoddess" src="/public/images/showcase/SeaGoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
           <h4>Sea goddess <a href="/public/images/showcase/SeaGoddess.png">view full</a></h4>
         </div>
       </div>
@@ -100,12 +100,12 @@
 
     <section class="parallax__group">
       <!-- <div class="container wide foreground">
-        <img is="smart-img" style="width: 420px; align-self: center;" alt="SnakeBoneTshirt" src="/public/images/tees/SnakeBoneTshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body">
+        <img is="img-resizing" style="width: 420px; align-self: center;" alt="SnakeBoneTshirt" src="/public/images/tees/SnakeBoneTshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body">
         <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
       </div> -->
       <div class="container wide foreground">
         <div class="align-center">
-          <img is="smart-img" style="width: 500px;" alt="Shellgoddess" src="/public/images/showcase/Shellgoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
+          <img is="img-resizing" style="width: 500px;" alt="Shellgoddess" src="/public/images/showcase/Shellgoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body">
           <h4>Shell goddess <a href="/public/images/showcase/Shellgoddess.png">view full</a></h4>
         </div>
       </div>

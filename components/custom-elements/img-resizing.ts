@@ -1,6 +1,6 @@
-import { IMG_RESOLUTIONS } from "./config.ts"
+import { IMG_RESOLUTIONS } from "../config.ts"
 
-class SmartImg extends HTMLImageElement {
+class ImgResizing extends HTMLImageElement {
   triggerEvent: string | undefined
   baseSrc: string
 
@@ -14,16 +14,12 @@ class SmartImg extends HTMLImageElement {
       globalThis.document.addEventListener(this.triggerEvent, () => this.swapSrc())
     } else this.swapSrc();
 
-    console.log("constructed smart-img");
+    console.log("constructed img-resizing");
   }
 
-  connectedCallback() {
-    console.log('here')
-    this.addEventListener("click", () => {
-      console.log("clicked")
-      window.location.href = this.baseSrc
-    });
-  }
+  // connectedCallback() {
+  //   console.log(this, 'connected!')
+  // }
 
   async swapSrc() {
     let targetRes = [...IMG_RESOLUTIONS.keys()][0]
@@ -45,7 +41,7 @@ class SmartImg extends HTMLImageElement {
 }
 
 globalThis.addEventListener("load", () => {
-  customElements.define('smart-img', SmartImg, {
+  customElements.define('img-resizing', ImgResizing, {
     extends: "img"
   })
 });

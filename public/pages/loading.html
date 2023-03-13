@@ -31,7 +31,7 @@
       "Scripting commandments...",
       "Weaving spells...",
       "Enscribing runes...",
-      "Polishing compendeum..."
+      "Polishing compendium..."
     ]
     document.querySelector("#loading-text").textContent = loadTexts[Math.ceil(Math.random()*loadTexts.length-1)];
     const sse = new EventSource("/load-event")

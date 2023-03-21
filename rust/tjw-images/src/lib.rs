@@ -3,8 +3,8 @@ extern crate image;
 use wasm_bindgen::prelude::*;
 use std::io;
 use image::io::{Reader};
-use image::{guess_format};
 use image::imageops::FilterType;
+use image::ImageFormat;
 
 #[wasm_bindgen]
 extern "C" {
@@ -17,9 +17,6 @@ extern "C" {
 
 #[wasm_bindgen] 
 pub fn resize_image(mut data: Vec<u8>, width: u32, height: u32) -> Vec<u8> {
-  // guess data format
-  let format = guess_format(&data).unwrap_or(image::ImageFormat::Png);
-
   // decode data into DynamicImage
   let full = Reader::new(io::Cursor::new(&data))
     .with_guessed_format()
@@ -27,33 +24,21 @@ pub fn resize_image(mut data: Vec<u8>, width: u32, height: u32) -> Vec<u8> {
     .decode()
     .unwrap();
 
+  // debug stuff
   // log_u32(width);
   // log_u32(height);
 
   // resize DynamicImage
   let resized = full.resize(width, height, FilterType::Lanczos3);
 
+  // // convert to webp for compression
+  // let encoder: Encoder = Encoder::from_image(&image).unwrap();
+
+  // // Encode image into WebPMemory.
+  // let encoded_webp: WebPMemory = encoder.encode(quality.unwrap_or(65f32));
+
   // write to data
-  resized.write_to(&mut io::Cursor::new(&mut data), format).expect("REASON");
+  resized.write_to(&mut io::Cursor::new(&mut data), ImageFormat::Png).expect("REASON");
 
   return data;
 }
-
-// let image = catch_unwind(|| {
-//   Reader::new(io::Cursor::new(&data))
-//     .with_guessed_format()
-//     .expect("REASON")
-//     .decode()
-//     .expect("REASON");
-// });
-
-// #[cfg(test)]
-// mod tests {
-//   use super::*;
-
-//   #[test]
-//   fn it_works() {
-//     let result = add(1, 2);
-//     assert_eq!(result, 3);
-//   }
-// }

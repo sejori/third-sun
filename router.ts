@@ -2,7 +2,7 @@ import * as Peko from "peko"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
 import { cache } from "./cache.ts"
-import { emitTS } from "./handlers/emit-ts.ts"
+import { emitTSBundle } from "./handlers/emit-bundle.ts"
 import { resizableImage } from "./handlers/resize-image.ts"
 import { loader } from "./middleware/loader.ts"
 // import { markdown } from "./handlers/markdown.ts"
@@ -32,7 +32,7 @@ router.addRoutes(components.map((file): Peko.Route => {
   return {
     path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
-    handler: emitTS(new URL(`./${fileRoute}`, import.meta.url))
+    handler: emitTSBundle(new URL(`./${fileRoute}`, import.meta.url))
   }
 }))
 

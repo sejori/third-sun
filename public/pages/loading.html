@@ -35,10 +35,7 @@
     ]
     document.querySelector("#loading-text").textContent = loadTexts[Math.ceil(Math.random()*loadTexts.length-1)];
     const sse = new EventSource("/load-event")
-    sse.onmessage = (e) => {
-      console.log('reload received')
-      window.location.reload()
-    }
+    sse.onmessage = (e) => window.location.reload()
     sse.onerror = (e) => sse.close()
     document.body.addEventListener("unload", () => sse.close())
   </script>

@@ -5,6 +5,7 @@
     "path": "https://deno.land/std@0.178.0/path/mod.ts",
     "fs": "https://deno.land/std@0.178.0/fs/mod.ts",
     "emit": "https://deno.land/x/emit@0.12.0/mod.ts",
-    "super_cereal": "https://deno.land/x/super_cereal@0.1.2/mod.ts"
+    "super_cereal": "https://deno.land/x/super_cereal@0.1.2/mod.ts",
+    "imagemagick": "https://deno.land/x/imagemagick_deno@0.0.19/mod.ts"
   }
 }

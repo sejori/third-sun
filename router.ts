@@ -4,14 +4,14 @@ import { fromFileUrl } from "path"
 import { cache } from "./cache.ts"
 import { emitTS } from "./handlers/emit-ts.ts"
 import { resizableImage } from "./handlers/resize-image.ts"
-import { preloader } from "./middleware/preloader.ts"
+import { loader } from "./middleware/loader.ts"
 // import { markdown } from "./handlers/markdown.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
 export const router = new Peko.Router()
 
-const prod = !!Deno.env.get("DENO_DEPLOYMENT_ID")
-/* for dev -> */ // const prod = true
+// const prod = !!Deno.env.get("DENO_DEPLOYMENT_ID")
+/* for dev -> */ const prod = true
 const headers = new Headers({
   "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
 })
@@ -21,9 +21,9 @@ console.log("PROD:" + prod)
 const indexUrl = new URL("./public/pages/index.html", import.meta.url)
 const tradeUrl = new URL("./public/pages/trade.html", import.meta.url)
 const archiveUrl = new URL("./public/pages/archive.html", import.meta.url)
-router.addRoute("/", preloader(indexUrl), Peko.staticHandler(indexUrl, { headers }))
-router.addRoute("/trade", preloader(tradeUrl), Peko.staticHandler(tradeUrl, { headers }))
-router.addRoute("/archive", preloader(archiveUrl), Peko.staticHandler(archiveUrl, { headers }))
+router.addRoute("/", loader(indexUrl), Peko.staticHandler(indexUrl, { headers }))
+router.addRoute("/trade", loader(tradeUrl), Peko.staticHandler(tradeUrl, { headers }))
+router.addRoute("/archive", loader(archiveUrl), Peko.staticHandler(archiveUrl, { headers }))
 
 // COMPONENTS
 const components = await recursiveReaddir(fromFileUrl(new URL("./components", import.meta.url)))

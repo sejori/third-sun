@@ -5,11 +5,16 @@ import { router } from "../router.ts"
 const server = new Server()
 server.use(router)
 
-// request pages to run preloader and generate precache
+// request all routes with loader middleware (pages)
+// loader will save page asset responses to precache if don't exist 
 const pageRoutes = router.routes.filter(route => {
   return !route.path.includes("public") || !route.path.includes("components")
 })
 
 for (const route of pageRoutes) {
-  await server.requestHandler(new Request(new URL(`http://${server.hostname}:${server.port}${route.path}`)))
+  await server.requestHandler(
+    new Request(
+      new URL(`http://${server.hostname}:${server.port}${route.path}`)
+    )
+  )
 }

@@ -26,25 +26,6 @@ p { font-family: system-ui, 'Helvetica Neue', sans-serif; font-size: 1.2rem; }
 a {
   color: #eb901a;
 }
-.cta {
-  margin: 12px;
-  padding: 12px;
-  color: whitesmoke;
-  background-color: #fdffff;
-  align-self: center;
-}
-.shadowed {
-  position: relative;
-}
-.shadowed::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-}
 
 section { padding: 80px 30px; position: relative; }
 section.fade { background: linear-gradient(#09132e, black); }
@@ -53,9 +34,13 @@ section h1 { color: #fdffff; }
 section p { color: whitesmoke; }
 
 footer {
-  background-color: whitesmoke;
-  color: darkgrey;
+  background-color: darkgrey;
+  color: whitesmoke;
   padding: 10px;
+}
+
+footer a {
+  color: whitesmoke;
 }
 
 .container {

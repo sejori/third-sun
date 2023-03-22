@@ -15,7 +15,7 @@ export function loader(pageUrl: URL): Middleware {
     if (!ctx.server.routes.some(route => route.path === "/load-event")) {
       ctx.server.addRoute("/load-event", (ctx) => {
         // update after connect in case load dispatch is too quick
-        setTimeout(() => loadTarget.dispatchEvent(new CustomEvent("send", { detail: `loaded: ${loaded}` })), 1000);
+        setTimeout(() => loadTarget.dispatchEvent(new CustomEvent("send", { detail: `loaded: ${loaded}` })), 3000);
         return sseHandler(loadTarget)(ctx)
       })
     }

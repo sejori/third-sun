@@ -1,12 +1,13 @@
-import { Middleware, sseHandler, staticHandler } from "peko"
+import { Middleware, sseHandler, ssrHandler } from "peko"
 import { cache } from "../cache.ts"
 import { savePagePrecache, loadPagePrecache } from "../utils/precache.ts"
 import { IMG_RESOLUTIONS } from "../components/config.ts"
+import Loading from "../pages/Loading.ts"
+import { html, renderToReadableStream } from "../utils/react.ts"
 
-const loadingUrl = new URL("../public/pages/loading.html", import.meta.url)
 const loadTarget = new EventTarget()
 
-export function loader(pageUrl: URL): Middleware {
+export function loader(pageHTML: string): Middleware {
   let loaded = false
 
   return (ctx, next) => {
@@ -20,7 +21,7 @@ export function loader(pageUrl: URL): Middleware {
       })
     }
 
-    loadPagePrecache(pageUrl, cache, async worked => {
+    loadPagePrecache(new URL(ctx.request.url), cache, async worked => {
       console.log("preloader found assets: ", worked)
       if (worked) {
         loaded = true
@@ -30,29 +31,28 @@ export function loader(pageUrl: URL): Middleware {
         await new Promise(res => setTimeout(res, 100))
 
         // do all res query params for images
-        const initImgSrcs = await getSrcs(pageUrl, `img(.)*is="img-resizing"(.)*`)
+        const initImgSrcs = getSrcs(pageHTML, `img(.)*is="img-resizing"(.)*`)
         const imgSrcs = initImgSrcs.map(src => {
           const base = src.split("?")[0]
           return [...IMG_RESOLUTIONS.keys()].map(key => `${base}?res=${key}`)
         }).flat()
 
-        await savePagePrecache(pageUrl, [
+        await savePagePrecache(new URL(ctx.request.url), [
           ...imgSrcs,
-          ...await getSrcs(pageUrl, "script")
+          ...getSrcs(pageHTML, "script")
         ])
         
         loadTarget.dispatchEvent(new CustomEvent("send", { detail: `loaded: ${loaded}` }))
       }
     })
 
-    return staticHandler(loadingUrl)(ctx)
+    return ssrHandler(() => renderToReadableStream(html`<${Loading} />`))(ctx)
   }
 }
 
-const getSrcs = async (pageURL: URL, tag: string) => {
+const getSrcs = (pageHTML: string, tag: string) => {
   const regex = new RegExp(`(?<=<${tag}(.)*src=")(.)*?(?="(.))`, "g")
-  const html = await Deno.readTextFile(pageURL)
-  const matches = html.match(regex)
+  const matches = pageHTML.match(regex)
 
   return matches || []
 }

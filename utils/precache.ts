@@ -3,7 +3,7 @@ import { ensureDir } from "fs"
 import { Store } from "super_cereal"
 import { router } from "../router.ts"
 
-export const loadPagePrecache = async (pageUrl: URL, cache: ResponseCache, cb: (worked: boolean) => void) => {
+export const loadPagePrecache = async (pageUrl: URL, cache: ResponseCache, cb: (worked: boolean) => void) => {  
   const dirUrl = toPrecacheDirUrl(pageUrl)
   const initCacheMap: Map<string, string> = new Map()
   let rootId = ""
@@ -32,19 +32,13 @@ export const loadPagePrecache = async (pageUrl: URL, cache: ResponseCache, cb: (
 export const readPrecacheDir = async (dirUrl: URL) => {
   const items: { key: string, value: string }[] = []
 
-  // ensure precache folder
   await ensureDir(dirUrl)
 
-  try {
-    for await (const dirEntry of Deno.readDir(dirUrl)) {
-      const key = dirEntry.name.split(".txt")[0]
-      const value = await Deno.readTextFile(new URL(`${dirUrl.href}/${dirEntry.name}`))
+  for await (const dirEntry of Deno.readDir(dirUrl)) {    
+    const key = dirEntry.name.split(".txt")[0]
+    const value = await Deno.readTextFile(new URL(`${dirUrl.href}/${dirEntry.name}`))
 
-      if (value) items.push({ key, value })
-    }
-  } catch(e) {
-    "Read precache failed. If in CI this is expected :)"
-    console.log(e)
+    if (value) items.push({ key, value })
   }
 
   return items
@@ -88,6 +82,7 @@ export const savePagePrecache = async (pageUrl: URL, routePaths: string[]) => {
 }
 
 const toPrecacheDirUrl = (url: URL) => {
-  const filename = url.pathname.split("/")[url.pathname.split("/").length-1]
-  return new URL(`../precache/${encodeURIComponent(filename)}`, import.meta.url) 
+  if (url.pathname === "/") url = new URL(`${url.href}index`)
+  const path = url.pathname.substring(1)
+  return new URL(`../precache/${encodeURIComponent(path)}`, import.meta.url) 
 }

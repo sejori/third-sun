@@ -34,7 +34,7 @@ section h1 { color: #fdffff; }
 section p { color: whitesmoke; }
 
 footer {
-  background-color: darkgrey;
+  background-color: #09132e;
   color: whitesmoke;
   padding: 10px;
 }
@@ -52,8 +52,28 @@ footer a {
   flex-direction: column;
 }
 
+.mt-50 {
+  margin-top: -50px;
+}
+
 .wide {
   max-width: 1200px;
+}
+
+.width-500 {
+  width: 500px;
+}
+
+.width-420 {
+  width: 420;
+}
+
+.width-360 {
+  width: 360;
+}
+
+.width-300 {
+  width: 420;
 }
 
 .center {
@@ -81,4 +101,8 @@ footer a {
 .spacer-md {
   user-select: none;
   font-size: 250px;
+}
+
+.justify-between {
+  justify-content: space-between;
 }

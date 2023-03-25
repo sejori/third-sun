@@ -17,8 +17,10 @@ const Index = () => html`
 
       <section id="info" class="blue-bg parallax__group">
         <${Nav} />
+      </section>
 
-        <div class="container wide foreground">
+      <section class="parallax__group">
+        <div class="container wide background">
           <h1>III Sun</h1>
           <p>A talent of legend from the depths below. A creator of things, graveyard so.</p>
           <p>Quencher of desires, noble and sadistic. Acquirer of knowledge, however non-altruistic.</p>
@@ -29,10 +31,8 @@ const Index = () => html`
 
       <section class="parallax__group">
         <div class="container wide foreground">
-          <div class="align-center">
-            <img is="img-resizing" class="width-500" alt="Beastfrombelow" src="/public/images/showcase/Beastfrombelow.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
-            <h4>Beast from below <a href="/public/images/showcase/Beastfrombelow.png">view full</a></h4>
-          </div>
+          <img is="img-resizing" class="align-center width-500" alt="Beastfrombelow" src="/public/images/showcase/Beastfrombelow.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+          <h4 class="align-center">Beast from below <a href="/public/images/showcase/Beastfrombelow.png">view full</a></h4>
         </div>
       </section>
 
@@ -42,10 +42,8 @@ const Index = () => html`
           <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
         </div> -->
         <div class="container wide foreground">
-          <div class="align-center">
-            <img is="img-resizing" class="width-500" alt="Runawaycoward" src="/public/images/showcase/Runawaycoward.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
-            <h4>Runaway coward <a href="/public/images/showcase/Runawaycoward.png">view full</a></h4>
-          </div>
+          <img is="img-resizing" class="width-500 align-center" alt="Runawaycoward" src="/public/images/showcase/Runawaycoward.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+          <h4 class="align-center">Runaway coward <a href="/public/images/showcase/Runawaycoward.png">view full</a></h4>
         </div>
       </section>
 
@@ -55,10 +53,8 @@ const Index = () => html`
           <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
         </div> -->
         <div class="container wide foreground">
-          <div class="align-center">
-            <img is="img-resizing" class="width-500" alt="SeaGoddess" src="/public/images/showcase/SeaGoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
-            <h4>Sea goddess <a href="/public/images/showcase/SeaGoddess.png">view full</a></h4>
-          </div>
+          <img is="img-resizing" class="align-center width-500" alt="SeaGoddess" src="/public/images/showcase/SeaGoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+          <h4 class="align-center">Sea goddess <a href="/public/images/showcase/SeaGoddess.png">view full</a></h4>
         </div>
       </section>
 
@@ -68,10 +64,8 @@ const Index = () => html`
           <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
         </div> -->
         <div class="container wide foreground">
-          <div class="align-center">
-            <img is="img-resizing" class="width-500" alt="Shellgoddess" src="/public/images/showcase/Shellgoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
-            <h4>Shell goddess <a href="/public/images/showcase/Shellgoddess.png">view full</a></h4>
-          </div>
+          <img is="img-resizing" class="align-center width-500" alt="Shellgoddess" src="/public/images/showcase/Shellgoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+          <h4 class="align-center">Shell goddess <a href="/public/images/showcase/Shellgoddess.png">view full</a></h4>
         </div>
       </section>
 

@@ -13,7 +13,7 @@ const Head = ({ style }: { style: string }) => html`
     <link rel="stylesheet" href="/public/style/parallax.css" />
 
     <!-- polyfill for safari - https://stackoverflow.com/questions/67466609/customizable-built-in-elements-on-safari-polyfill-via-script-tag-vs-es6-import -->
-    <script src="/public/scripts/dev-socket.js"></script>
+    ${Deno?.args[0] === "dev" && html`<script src="/public/scripts/dev-socket.js"></script>`}
     <script src="/public/scripts/custom-elements-shim.js"></script>
     <script type="module" src="/components/custom-elements/img-resizing.ts" async></script>
     <script type="module" src="/components/custom-elements/nav-menu.ts" async></script>

@@ -3,5 +3,5 @@ import htm from "https://esm.sh/htm@3.1.1"
 export { 
   renderToString,
   renderToReadableStream 
-} from "https://esm.sh/react-dom@18.2.0/server"
+} from "https://esm.sh/react-dom@18.2.0/server?dev"
 export const html = htm.bind(React.createElement)

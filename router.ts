@@ -15,7 +15,7 @@ import Archive from "./pages/Archive.ts"
 
 export const router = new Peko.Router()
 
-const prod = !!Deno.env.get("DENO_DEPLOYMENT_ID")
+const prod = Deno.args[0] !== "dev"
 /* for dev -> */ //const prod = true
 const headers = new Headers({
   "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
@@ -25,17 +25,17 @@ console.log("PROD:" + prod)
 // PAGES
 router.addRoute(
   "/", 
-  loader(renderToString(html`<${Index} />`)), 
+  prod ? loader(renderToString(html`<${Index} />`)) : [], 
   Peko.ssrHandler(() => renderToReadableStream(html`<${Index} />`), { headers })
 )
 router.addRoute(
   "/trade", 
-  loader(renderToString(html`<${Trade} />`)), 
+  prod ? loader(renderToString(html`<${Trade} />`)) : [], 
   Peko.ssrHandler(() => renderToReadableStream(html`<${Trade} />`), { headers })
 )
 router.addRoute(
   "/archive", 
-  loader(renderToString(html`<${Archive} />`)), 
+  prod ? loader(renderToString(html`<${Archive} />`)) : [], 
   Peko.ssrHandler(() => renderToReadableStream(html`<${Archive} />`), { headers })
 )
 

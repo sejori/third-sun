@@ -12,6 +12,7 @@ const Head = () => html`
     <link rel="stylesheet" href="/public/style/index.css" />
     <link rel="stylesheet" href="/public/style/nav.css" />
     <link rel="stylesheet" href="/public/style/parallax.css" />
+    <link rel="stylesheet" href="/public/style/trade.css" />
 
     <!-- polyfill for safari - https://stackoverflow.com/questions/67466609/customizable-built-in-elements-on-safari-polyfill-via-script-tag-vs-es6-import -->
     <script src="/public/scripts/dev-socket.js"></script>

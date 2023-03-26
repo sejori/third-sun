@@ -71,7 +71,7 @@ const Index = () => html`
 
       <section class="parallax__group">
         <div class="container wide foreground">
-          <div class="spacer-md">&nbsp;</div>
+          <div class="spacer-md"></div>
         </div>
       </section>
 

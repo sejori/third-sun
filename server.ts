@@ -18,7 +18,7 @@ server.use(router)
 server.listen(3000) // say hello Rabbit boi .b,b!
 
 // hot-reload events
-if (!Deno.env.get("DENO_DEPLOYMENT_ID")) {
+if (Deno.args[0] === "dev") {
   const watchTarget = new EventTarget()
 
   server.addRoute("/devSocket", Peko.sseHandler(watchTarget))

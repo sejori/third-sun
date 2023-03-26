@@ -58,14 +58,6 @@ footer a {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
-.flex {
-  display: flex;
-}
-
-.column {
-  flex-direction: column;
-}
-
 .center {
   align-items: center;
   justify-content: center;

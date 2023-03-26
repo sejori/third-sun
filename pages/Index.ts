@@ -1,10 +1,10 @@
 import { html } from "../utils/react.ts"
 import Head from "../components/Head.ts"
-import Nav from "../components/Nav.ts"
+import Nav, { NavCSS } from "../components/Nav.ts"
 import Footer from "../components/Footer.ts"
 
 const Index = () => html`
-  <${Head} />
+  <${Head} style=${NavCSS} />
 
   <body>
     <div class="parallax">

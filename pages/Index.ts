@@ -22,10 +22,7 @@ const Index = () => html`
       <section class="parallax__group">
         <div class="container wide background">
           <h1>III Sun</h1>
-          <p>A talent of legend from the depths below. A creator of things, graveyard so.</p>
-          <p>Quencher of desires, noble and sadistic. Acquirer of knowledge, however non-altruistic.</p>
-          <p>Sample the wares by continuing to scroll...</p>
-          <p>When inspiration strikes, you know who to call...</p>
+          <p> Graphic Design and illustration from Stonehenge, now based in Scotland. Combining the energy of Druid Circles and Pictish Standing Stones. Working with the a concept that is echoed throughout time // Truth is the harvest scythe. What is sown, Love, Anger or Bitterness. That shall be your bread \\ This is belief that beauty is everywhere, because all is one in the universe. Including the monsters in our heads. /p>
         </div>
       </section>
 

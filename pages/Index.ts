@@ -25,7 +25,7 @@ const Index = () => html`
           <p> Graphic Design and illustration from Stonehenge, now based in Scotland.</p>
           <p> Combining the energy of Druid Circles and Pictish Standing Stones. Working with the a concept that is echoed throughout time.</p>
           <p> Truth is the harvest scythe. What is sown, Love, Anger or Bitterness. That shall be your bread. </p> 
-          <p> This is belief that beauty is everywhere, because all is one in the universe. Including the monsters in our heads. /p>
+          <p> This is belief that beauty is everywhere, because all is one in the universe. Including the monsters in our heads. </p>
         </div>
       </section>
 

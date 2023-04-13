@@ -21,7 +21,7 @@ const Index = () => html`
 
       <section class="parallax__group">
         <div class="container wide background">
-          <h1>III Sun</h1>
+          <h1>iii Sun</h1>
           <p> Graphic Design and illustration from Stonehenge, now based in Scotland.</p>
           <p> Combining the energy of Druid Circles and Pictish Standing Stones. Working with the a concept that is echoed throughout time.</p>
           <p> Truth is the harvest scythe. What is sown, Love, Anger or Bitterness. That shall be your bread. </p> 

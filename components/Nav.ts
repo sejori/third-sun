@@ -1,4 +1,4 @@
-import { html, css } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
+import { html, css } from "pekommunity/react/mod.ts"
 
 const Nav = () => html`
   <nav is="nav-menu">

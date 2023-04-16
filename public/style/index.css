@@ -27,7 +27,7 @@ a {
   color: #eb901a;
 }
 
-section { padding: 80px 30px; position: relative; }
+section { position: relative; }
 section.fade { background: linear-gradient(#09132e, black); }
 section.blue-bg { background-color: #09132e ; }
 section h1 { color: #fdffff; }
@@ -47,7 +47,7 @@ footer a {
   margin: auto;
   padding: 10px;
   max-width: 800px;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -56,6 +56,14 @@ footer a {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
 }
 
 .center {
@@ -69,6 +77,14 @@ footer a {
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.wrap {
+  flex-wrap: wrap;
 }
 
 .wrap-reverse {
@@ -95,14 +111,6 @@ footer a {
 .spacer-md {
   user-select: none;
   font-size: 250px;
-}
-
-.mt-50 {
-  margin-top: -50px;
-}
-
-.mt-80 {
-  margin-top: 80px;
 }
 
 .wide {

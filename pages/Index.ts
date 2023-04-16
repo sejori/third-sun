@@ -1,4 +1,4 @@
-import { html, css } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
+import { html, css } from "pekommunity/react/mod.ts"
 import Head from "../components/Head.ts"
 import Nav from "../components/Nav.ts"
 import Footer from "../components/Footer.ts"
@@ -29,55 +29,45 @@ const Index = () => html`
         </div>
       </section>
 
-      <section class="parallax__group">
+      <section>
         <div class="container wide foreground">
-          <img is="img-resizing" class="align-center width-500" alt="Beastfrombelow" src="/public/images/showcase/Beastfrombelow.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
-          <h4 class="align-center">Beast from below <a href="/public/images/showcase/Beastfrombelow.png">view full</a></h4>
+          <div class="flex wrap justify-around">
+            <div class="flex column center showcase-image">
+              <img is="img-resizing" class="align-center width-500" alt="Beastfrombelow" src="/public/images/showcase/Beastfrombelow.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+              <h4 class="align-center">Beast from below <a href="/public/images/showcase/Beastfrombelow.png">view full</a></h4>
+            </div>
+            <div class="flex column center showcase-image">
+              <img is="img-resizing" class="width-500 align-center" alt="Runawaycoward" src="/public/images/showcase/Runawaycoward.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+              <h4 class="align-center">Runaway coward <a href="/public/images/showcase/Runawaycoward.png">view full</a></h4>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="parallax__group">
-        <!-- <div class="container wide foreground">
-          <img is="img-resizing" style="width: 420px; align-self: center;" alt="Sectapustshirt" src="/public/images/tees/Sectapustshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body" />
-          <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
-        </div> -->
+      <section>
         <div class="container wide foreground">
-          <img is="img-resizing" class="width-500 align-center" alt="Runawaycoward" src="/public/images/showcase/Runawaycoward.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
-          <h4 class="align-center">Runaway coward <a href="/public/images/showcase/Runawaycoward.png">view full</a></h4>
-        </div>
-      </section>
-
-      <section class="parallax__group">
-        <!-- <div class="container wide foreground">
-          <img is="img-resizing" style="width: 420px; align-self: center;" alt="SnakeBoneTshirt" src="/public/images/tees/SnakeBoneTshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body" />
-          <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
-        </div> -->
-        <div class="container wide foreground">
-          <img is="img-resizing" class="align-center width-500" alt="SeaGoddess" src="/public/images/showcase/SeaGoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
-          <h4 class="align-center">Sea goddess <a href="/public/images/showcase/SeaGoddess.png">view full</a></h4>
-        </div>
-      </section>
-
-      <section class="parallax__group">
-        <!-- <div class="container wide foreground">
-          <img is="img-resizing" style="width: 420px; align-self: center;" alt="SnakeBoneTshirt" src="/public/images/tees/SnakeBoneTshirt.png?res=low" fetchpriority="high" data-triggerevent="nav-menu_move-to-body" />
-          <a class="cta" style="margin-top: -50px" href="#woop-nearly-a-sale!"><h4>£28.00</h4></a>
-        </div> -->
-        <div class="container wide foreground">
-          <img is="img-resizing" class="align-center width-500" alt="Shellgoddess" src="/public/images/showcase/Shellgoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
-          <h4 class="align-center">Shell goddess <a href="/public/images/showcase/Shellgoddess.png">view full</a></h4>
-        </div>
-      </section>
-
-      <section class="parallax__group">
-        <div class="container wide foreground">
-          <div class="spacer-md"></div>
+          <div class="flex wrap justify-around">
+            <div class="flex column center showcase-image">
+              <img is="img-resizing" class="align-center width-500" alt="SeaGoddess" src="/public/images/showcase/SeaGoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+              <h4 class="align-center">Sea goddess <a href="/public/images/showcase/SeaGoddess.png">view full</a></h4>
+            </div>
+            <div class="flex column center showcase-image">
+              <img is="img-resizing" class="align-center width-500" alt="Shellgoddess" src="/public/images/showcase/Shellgoddess.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+              <h4 class="align-center">Shell goddess <a href="/public/images/showcase/Shellgoddess.png">view full</a></h4>
+            </div>
+          </div>
         </div>
       </section>
 
       <${Footer} />
     </div>
   </body>
+`
+
+css`
+  .showcase-image {
+    margin: 80px 0;
+  }
 `
 
 export default Index

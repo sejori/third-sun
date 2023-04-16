@@ -1,4 +1,4 @@
-import { html, accumulatedStyles } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
+import { html, accumulatedStyles } from "pekommunity/react/mod.ts"
 
 const Head = () => html`
   <head>
@@ -18,7 +18,7 @@ const Head = () => html`
     <script type="module" src="/components/custom-elements/img-resizing.ts" async></script>
     <script type="module" src="/components/custom-elements/nav-menu.ts" async></script>
 
-    <style dangerouslySetInnerHTML=${{ __html: accumulatedStyles }} ></style>
+    <style dangerouslySetInnerHTML=${{ __html: accumulatedStyles.css }} ></style>
   </head>
 `
 

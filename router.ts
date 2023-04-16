@@ -1,11 +1,11 @@
 import * as Peko from "peko"
 import { resizableImage } from "pekommunity/imagemagick_deno/mod.ts"
 import { html, renderToReadableStream, renderToString } from "pekommunity/react/mod.ts"
+import { emitTSBundle } from "pekommunity/emit/mod.ts"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
 
 import { cache } from "./cache.ts"
-import { emitTSBundle } from "./handlers/emit-bundle.ts"
 import { loader } from "./middleware/loader.ts"
 import { IMG_RESOLUTIONS } from "./components/config.ts" 
 // import { markdown } from "./handlers/markdown.ts"
@@ -18,7 +18,7 @@ import Archive from "./pages/Archive.ts"
 export const router = new Peko.Router()
 
 const prod = Deno.args[0] !== "dev"
-/* for dev -> */ //const prod = true
+/* for dev -> */ // const prod = true
 const headers = new Headers({
   "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
 })

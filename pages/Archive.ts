@@ -1,4 +1,4 @@
-import { html } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
+import { html } from "pekommunity/react/mod.ts"
 import Head from "../components/Head.ts"
 import Nav from "../components/Nav.ts"
 import Footer from "../components/Footer.ts"

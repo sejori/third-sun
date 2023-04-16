@@ -1,4 +1,4 @@
-import { html, css } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
+import { html, css } from "pekommunity/react/mod.ts"
 import Head from "../components/Head.ts"
 import Nav from "../components/Nav.ts"
 import Tee from "../components/Tee.ts"
@@ -26,7 +26,7 @@ const Trade = () => html`
         <h1 id="trade-heading">Trade</h1>
 
         <div id="trade-block" class="foreground">
-          <div class="container grid-auto mt-80">
+          <div class="container grid-auto tee-grid">
             ${tees.map(tee => html`<${Tee} tee=${tee} />`)}
           </div>
           <img id="trade-guy" is="img-resizing" class="width-500" alt="TradeGuy" src="/public/images/trade/TradePic.png?res=med" fetchpriority="high" />
@@ -49,6 +49,10 @@ css`
     flex-wrap: wrap-reverse;
     justify-content: flex-end;
     align-items: flex-end;
+  }
+
+  #trade-block div {
+    margin-top: -80px;
   }
 
   @media (min-width: 1360px) {

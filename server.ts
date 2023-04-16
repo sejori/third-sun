@@ -1,4 +1,5 @@
 import * as Peko from "peko"
+import { fromFileUrl } from "path"
 import { router } from "./router.ts"
 
 const server = new Peko.Server()
@@ -22,7 +23,7 @@ if (Deno.args[0] === "dev") {
   const watchTarget = new EventTarget()
 
   server.addRoute("/devSocket", Peko.sseHandler(watchTarget))
-  const watcher = Deno.watchFs(new URL("./public", import.meta.url).pathname)
+  const watcher = Deno.watchFs(fromFileUrl(new URL("./public", import.meta.url)))
   for await (const event of watcher) {
     watchTarget.dispatchEvent(new CustomEvent("send", { detail: event }))
   }

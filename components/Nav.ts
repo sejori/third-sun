@@ -1,4 +1,4 @@
-import { html, css } from "../utils/react.ts"
+import { html, css } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
 
 const Nav = () => html`
   <nav is="nav-menu">
@@ -24,7 +24,7 @@ const Nav = () => html`
   </nav>
 `
 
-export const NavCSS = css`
+css`
   nav {
     z-index: 3;
     position: absolute;

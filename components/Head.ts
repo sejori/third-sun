@@ -1,6 +1,6 @@
-import { html } from "../utils/react.ts"
+import { html, accumulatedStyles } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
 
-const Head = ({ style }: { style: string }) => html`
+const Head = () => html`
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,7 +18,7 @@ const Head = ({ style }: { style: string }) => html`
     <script type="module" src="/components/custom-elements/img-resizing.ts" async></script>
     <script type="module" src="/components/custom-elements/nav-menu.ts" async></script>
 
-    <style dangerouslySetInnerHTML=${{ __html: style }} />
+    <style dangerouslySetInnerHTML=${{ __html: accumulatedStyles }} ></style>
   </head>
 `
 

@@ -1,4 +1,4 @@
-import { html, css } from "../utils/react.ts"
+import { html, css } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
 
 const Tee = ({ tee }: { tee: Record<string, string>}) => html`
   <a href="${tee.link}" class="tee-block">
@@ -7,7 +7,7 @@ const Tee = ({ tee }: { tee: Record<string, string>}) => html`
   </a>
 `
 
-export const TeeCSS = css`
+css`
   .tee-block {
     display: flex;
     flex-direction: column;

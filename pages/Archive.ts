@@ -1,10 +1,10 @@
-import { html } from "../utils/react.ts"
+import { html } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
 import Head from "../components/Head.ts"
-import Nav, { NavCSS } from "../components/Nav.ts"
+import Nav from "../components/Nav.ts"
 import Footer from "../components/Footer.ts"
 
 const Archive = () => html`
-  <${Head} style=${NavCSS}/>
+  <${Head} />
 
   <body>
     <div class="parallax">

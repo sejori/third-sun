@@ -3,7 +3,7 @@ import { cache } from "../cache.ts"
 import { savePagePrecache, loadPagePrecache } from "../utils/precache.ts"
 import { IMG_RESOLUTIONS } from "../components/config.ts"
 import Loading from "../pages/Loading.ts"
-import { html, renderToReadableStream } from "../utils/react.ts"
+import { html, renderToReadableStream } from "pekommunity/react/mod.ts"
 
 const loadTarget = new EventTarget()
 

@@ -1,4 +1,4 @@
-import { html } from "../utils/react.ts"
+import { html } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
 
 const Footer = () => html`
   <footer class="parallax__group container justify-end">

@@ -1,7 +1,7 @@
-import { html, css } from "../utils/react.ts"
+import { html, css } from "https://deno.land/x/pekommunity@0.0.1/react/mod.ts"
 import Head from "../components/Head.ts"
-import Nav, { NavCSS } from "../components/Nav.ts"
-import Tee, { TeeCSS } from "../components/Tee.ts"
+import Nav from "../components/Nav.ts"
+import Tee from "../components/Tee.ts"
 import Footer from "../components/Footer.ts"
 
 const tees = [
@@ -17,7 +17,7 @@ const tees = [
 ]
 
 const Trade = () => html`
-  <${Head} style=${TradeCSS.concat(NavCSS).concat(TeeCSS)} />
+  <${Head} />
 
   <body>
     <div class="parallax">
@@ -38,7 +38,7 @@ const Trade = () => html`
   </body>
 `
 
-const TradeCSS = css`
+css`
   #trade-heading {
     position: absolute;
     visibility: hidden;

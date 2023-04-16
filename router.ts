@@ -1,11 +1,13 @@
 import * as Peko from "peko"
+import { resizableImage } from "pekommunity/imagemagick_deno/mod.ts"
+import { html, renderToReadableStream, renderToString } from "pekommunity/react/mod.ts"
 import { recursiveReaddir } from "recursiveReadDir"
 import { fromFileUrl } from "path"
+
 import { cache } from "./cache.ts"
 import { emitTSBundle } from "./handlers/emit-bundle.ts"
-import { resizableImage } from "./handlers/resize-image.ts"
 import { loader } from "./middleware/loader.ts"
-import { html, renderToReadableStream, renderToString } from "./utils/react.ts"
+import { IMG_RESOLUTIONS } from "./components/config.ts" 
 // import { markdown } from "./handlers/markdown.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
@@ -42,7 +44,7 @@ router.addRoute(
 // COMPONENTS
 const components = await recursiveReaddir(fromFileUrl(new URL("./components", import.meta.url)))
 router.addRoutes(components.map((file): Peko.Route => {
-  const fileRoute = file.slice(Deno.cwd().length+1)
+  const fileRoute = file.slice(Deno.cwd().length+1).replaceAll(/\\/g, "/")
   return {
     path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
@@ -54,11 +56,11 @@ router.addRoutes(components.map((file): Peko.Route => {
 // IMAGES
 const images = await recursiveReaddir(fromFileUrl(new URL("./public/images", import.meta.url)))
 router.addRoutes(images.map((file): Peko.Route => {
-  const fileRoute = file.slice(Deno.cwd().length+1)
+  const fileRoute = file.slice(Deno.cwd().length+1).replaceAll(/\\/g, "/")
   return {
     path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
-    handler: resizableImage(fileRoute)
+    handler: resizableImage(new URL(`./${fileRoute}`, import.meta.url), IMG_RESOLUTIONS)
   }
 }))
 
@@ -66,7 +68,7 @@ router.addRoutes(images.map((file): Peko.Route => {
 // SCRIPTS
 const scripts = await recursiveReaddir(fromFileUrl(new URL("./public/scripts", import.meta.url)))
 router.addRoutes(scripts.map((file): Peko.Route => {
-  const fileRoute = file.slice(Deno.cwd().length+1)
+  const fileRoute = file.slice(Deno.cwd().length+1).replaceAll(/\\/g, "/")
   return {
     path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],
@@ -88,7 +90,7 @@ router.addRoutes(scripts.map((file): Peko.Route => {
 // STYLE
 const style = await recursiveReaddir(fromFileUrl(new URL("./public/style", import.meta.url)))
 router.addRoutes(style.map((file): Peko.Route => {
-  const fileRoute = file.slice(Deno.cwd().length+1)
+  const fileRoute = file.slice(Deno.cwd().length+1).replaceAll(/\\/g, "/")
   return {
     path: `/${fileRoute}`,
     middleware: prod ? Peko.cacher(cache) : [],

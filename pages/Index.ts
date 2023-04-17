@@ -58,6 +58,21 @@ const Index = () => html`
           </div>
         </div>
       </section>
+      
+      <section>
+        <div class="container wide foreground">
+          <div class="flex wrap justify-around">
+            <div class="flex column center showcase-image">
+              <img is="img-resizing" class="align-center width-500" alt="praytobeheardbw" src="/public/images/showcase/praytobeheardbw.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+              <h4 class="align-center">Sea goddess <a href="/public/images/showcase/praytobeheardbw.png">view full</a></h4>
+            </div>
+            <div class="flex column center showcase-image">
+              <img is="img-resizing" class="align-center width-500" alt="grinninghair" src="/public/images/showcase/grinninghairbw.png?res=low" fetchpriority="low" data-triggerevent="nav-menu_move-to-body" />
+              <h4 class="align-center">Shell goddess <a href="/public/images/showcase/grinninghairbw.png">view full</a></h4>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <${Footer} />
     </div>

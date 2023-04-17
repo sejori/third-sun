@@ -66,16 +66,21 @@ export const savePagePrecache = async (pageUrl: URL, routePaths: string[]) => {
   await ensureDir(dirUrl)
 
   // make requests to file dummy cache
-  await Promise.all(routePaths.map(path => server.requestHandler(new Request(new URL(`http://${server.hostname}:${server.port}${path}`)))))
+  for (const routePath of routePaths) {
+    await server.requestHandler(
+      new Request(
+        new URL(`http://${server.hostname}:${server.port}${routePath}`)
+      )
+    )
+  }
 
   // serialize dummy cache items with store
   const rootId = await store.save(cache.items.map(item => {
     return { key: item.key, value: item.value }
   }))
 
-  // write root id to root file
+  // write root id to root file then write all cache items to files
   await Deno.writeFile(new URL("./root.txt", `${dirUrl}/`), encoder.encode(rootId))
-  // write all cache items to files
   await Promise.all(Object.entries(shelf).map(async entry => {
     await Deno.writeFile(new URL(`./${entry[0]}.txt`, `${dirUrl}/`), encoder.encode(entry[1]))
   }))

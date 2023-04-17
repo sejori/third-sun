@@ -13,10 +13,10 @@ const tees = [
   { name: "test", src: "/public/images/tees/Sectapus002TShirt.png", link: "nearly-a-sale!" },
   { name: "test", src: "/public/images/tees/Robot004TShirt.png", link: "nearly-a-sale!" },
   { name: "test", src: "/public/images/tees/Shrooms006TShirt.png", link: "nearly-a-sale!" },
-  { name: "test", src: "/public/images/tees/BlckTshirtFront.png", link: "nearly-a-sale!" }
-  { name: "test", src: "/public/images/tees/Sectapus001Tshirt.png", link: "nearly-a-sale!" }
-  { name: "test", src: "/public/images/tees/Robot0003TShirt.png", link: "nearly-a-sale!" }
-  { name: "test", src: "/public/images/tees/Shrooms007Tshirt.png", link: "nearly-a-sale!" }
+  { name: "test", src: "/public/images/tees/BlckTshirtFront.png", link: "nearly-a-sale!" },
+  { name: "test", src: "/public/images/tees/Sectapus001Tshirt.png", link: "nearly-a-sale!" },
+  { name: "test", src: "/public/images/tees/Robot0003TShirt.png", link: "nearly-a-sale!" },
+  { name: "test", src: "/public/images/tees/Shrooms007Tshirt.png", link: "nearly-a-sale!" },
 ]
 
 const Trade = () => html`

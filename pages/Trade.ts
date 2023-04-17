@@ -5,10 +5,10 @@ import Tee from "../components/Tee.ts"
 import Footer from "../components/Footer.ts"
 
 const tees = [
-  { name: "test", src: "/public/images/tees/WavesTshirt.png", link: "nearly-a-sale!" },
-  { name: "test", src: "/public/images/tees/WavesTshirt.png", link: "nearly-a-sale!" },
-  { name: "test", src: "/public/images/tees/WavesTshirt.png", link: "nearly-a-sale!" },
-  { name: "test", src: "/public/images/tees/WavesTshirt.png", link: "nearly-a-sale!" },
+  { name: "test", src: "/public/images/tees/BlckJumperFront.png", link: "nearly-a-sale!" },
+  { name: "test", src: "/public/images/tees/Sectapus001Jumper.png", link: "nearly-a-sale!" },
+  { name: "test", src: "/public/images/tees/Robot003Jumper.png", link: "nearly-a-sale!" },
+  { name: "test", src: "/public/images/tees/Shrooms007Jumper.png", link: "nearly-a-sale!" },
   { name: "test", src: "/public/images/tees/WavesTshirt.png", link: "nearly-a-sale!" },
   { name: "test", src: "/public/images/tees/WavesTshirt.png", link: "nearly-a-sale!" },
   { name: "test", src: "/public/images/tees/WavesTshirt.png", link: "nearly-a-sale!" },

@@ -1,11 +1,11 @@
 let gelato_api_key = ""
-if (Deno.env.get("DENO_REGION")) {
+if (Deno.args[0] === "dev") {
+  gelato_api_key = await Deno.readTextFile(new URL("../keys/gelato.txt", import.meta.url))
+} else {
   const {
     GELATO_API_KEY
   } = Deno.env.toObject()
   gelato_api_key = GELATO_API_KEY
-} else {
-  gelato_api_key = await Deno.readTextFile(new URL("../keys/gelato.txt", import.meta.url))
 }
 
 const getCatalogs = async () => {

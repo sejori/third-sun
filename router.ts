@@ -11,6 +11,8 @@ import { IMG_RESOLUTIONS } from "./components/config.ts"
 // import { markdown } from "./handlers/markdown.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
+import { getProducts } from "./utils/gelato.ts"
+
 import Index from "./pages/Index.ts"
 import Trade from "./pages/Trade.ts"
 import Archive from "./pages/Archive.ts"
@@ -23,6 +25,15 @@ const headers = new Headers({
   "Cache-Control": prod ? "max-age=600, stale-while-revalidate=86400" : ""
 })
 console.log("PROD:" + prod)
+
+// gelato test
+router.addRoute("/t-shirts", async () => {
+  return new Response(JSON.stringify(await getProducts("t-shirts"), null, 2), {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+})
 
 // PAGES
 router.addRoute(

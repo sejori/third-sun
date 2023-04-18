@@ -66,12 +66,9 @@ export const savePagePrecache = async (pageUrl: URL, routePaths: string[]) => {
   await ensureDir(dirUrl)
 
   // make requests to file dummy cache
-  for (const routePath of routePaths) {
-    await server.requestHandler(
-      new Request(
-        new URL(`http://${server.hostname}:${server.port}${routePath}`)
-      )
-    )
+  const requestChunkSize = 5;
+  for (let i=0; i<routePaths.length; i+=requestChunkSize) {
+    await Promise.all(routePaths.slice(i, i+requestChunkSize).map(path => server.requestHandler(new Request(new URL(`http://${server.hostname}:${server.port}${path}`)))))
   }
 
   // serialize dummy cache items with store

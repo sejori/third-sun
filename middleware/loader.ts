@@ -21,15 +21,12 @@ export function loader(pageHTML: string): Middleware {
       })
     }
 
-    loadPagePrecache(new URL(ctx.request.url), cache, async worked => {
+    setTimeout(() => loadPagePrecache(new URL(ctx.request.url), cache, async worked => {
       console.log("preloader found assets: ", worked)
       if (worked) {
         loaded = true
         loadTarget.dispatchEvent(new CustomEvent("send", { detail: `loaded: ${loaded}` }))
       } else {
-        // let initial response happen before blocking with request spam
-        await new Promise(res => setTimeout(res, 250))
-
         // do all res query params for images
         const initImgSrcs = getSrcs(pageHTML, `img(.)*is="img-resizing"(.)*`)
         const imgSrcs = initImgSrcs.map(src => {
@@ -44,7 +41,7 @@ export function loader(pageHTML: string): Middleware {
         
         loadTarget.dispatchEvent(new CustomEvent("send", { detail: `loaded: ${loaded}` }))
       }
-    })
+    }), 100)
 
     return ssrHandler(() => renderToReadableStream(html`<${Loading} />`))(ctx)
   }

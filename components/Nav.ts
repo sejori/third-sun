@@ -13,12 +13,12 @@ const Nav = () => html`
         <li>
           <a href="/trade">Trade</a>
         </li>
-        <li>
+        <!-- <li>
           <a href="/stories">Stories</a>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
           <a href="/archive">The depths</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>

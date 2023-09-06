@@ -1,9 +1,11 @@
 import { html, css } from "pekommunity/react/mod.ts"
 
+// <a href="${tee.link}" class="tee-block">
+
 const Tee = ({ tee }: { tee: Record<string, string>}) => html`
-  <a href="${tee.link}" class="tee-block">
+   <a href="/checkout" class="tee-block">
     <img is="img-resizing" class="align-center" alt="${tee.name}" src="${tee.src}?res=low" fetchpriority="high" />
-    <p class="align-center">Click to view</p>
+    <p class="align-center">Purchase</p>
   </a>
 `
 

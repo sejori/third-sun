@@ -32,7 +32,6 @@ const Trade = () => html`
           <div class="container grid-auto tee-grid">
             ${tees.map(tee => html`<${Tee} tee=${tee} />`)}
           </div>
-          <img id="trade-guy" is="img-resizing" class="width-500" alt="TradeGuy" src="/public/images/trade/TradePic.png?res=med" fetchpriority="high" />
         </div>
       </section>
 
@@ -48,21 +47,17 @@ css`
   }
 
   #trade-block {
+    margin: auto;
     display: flex;
-    flex-wrap: wrap-reverse;
-    justify-content: flex-end;
-    align-items: flex-end;
+    flex-wrap: wrap;
+    background-image: url("/public/images/trade/TradePic.png?res=med");
+    background-repeat: no-repeat;
+    background-position: right;
+    min-height: 100%;
   }
 
   #trade-block div {
-    margin-top: -80px;
-  }
-
-  @media (min-width: 1360px) {
-    #trade-guy {
-      position: sticky;
-      top: 80px;
-    }
+    margin-top: 40px;
   }
 `
 

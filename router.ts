@@ -8,6 +8,7 @@ import { fromFileUrl } from "path"
 import { cache } from "./cache.ts"
 import { loader } from "./middleware/loader.ts"
 import { IMG_RESOLUTIONS } from "./components/config.ts" 
+import { checkout } from "./handlers/stripe-checkout.ts"
 // import { markdown } from "./handlers/markdown.ts"
 // const htmlDoc = await Deno.readTextFile(indexUrl)
 
@@ -34,6 +35,9 @@ router.addRoute("/t-shirts", async () => {
     }
   })
 })
+
+// stripe checkout
+router.addRoute("/checkout", checkout("price_1NnSybJ5zd0Ft3OG1k45gyj6"))
 
 // PAGES
 router.addRoute(

@@ -28,7 +28,7 @@ export function loader(pageHTML: string): Middleware {
         loadTarget.dispatchEvent(new CustomEvent("send", { detail: `loaded: ${loaded}` }))
       } else {
         // let initial response happen before blocking with request spam
-        await new Promise(res => setTimeout(res, 100))
+        await new Promise(res => setTimeout(res, 250))
 
         // do all res query params for images
         const initImgSrcs = getSrcs(pageHTML, `img(.)*is="img-resizing"(.)*`)

@@ -6,7 +6,7 @@ const {
 } = Deno.env.toObject()
 
 const stripe = new Stripe(
-  STRIPE_API_KEY,
+  STRIPE_API_KEY || "pk_test_51NnSkoJ5zd0Ft3OG61dIXhtCkGGA6h11KvTDoY11tyQqAuu3hRExNilVGKZYwzu5ewZE9ffSPWE1cp8LXUMRNXQ800C9Mh1VN8",
   {
     apiVersion: "2023-08-16"
   }

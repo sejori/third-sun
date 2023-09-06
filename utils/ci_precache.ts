@@ -11,7 +11,11 @@ server.use(router)
 // these assets are then requested in the precache util
 // so all we need to do here is request to pages to kick start the middleware
 const pageRoutes = router.routes.filter(route => {
-  return (!route.path.includes("public") && !route.path.includes("components"))
+  return (
+    !route.path.includes("public") && 
+    !route.path.includes("components") &&
+    !route.path.includes("/checkout")
+    ) // THIS IS DUMP
 })
 
 for (const route of pageRoutes) {

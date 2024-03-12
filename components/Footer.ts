@@ -5,7 +5,7 @@ const Footer = () => html`
     <div class="align-center">
       <div class="footer-text-big">&nbsp;</div>
       <h2>Do you want your own website?</h2>
-      <h3><a href="">Summon incredible visuals!</a></h3>
+      <h3><a href=""></a></h3>
       <p>
         Made with ❤️‍🔥 by <a href="https://thesebsite.com">seb</a> & <a href="https://iiisun.art">iiisun</a>.
       </p>
